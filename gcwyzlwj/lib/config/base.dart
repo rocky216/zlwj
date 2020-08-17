@@ -1,0 +1,1 @@
+final baseUrl = "https://api.jxhtservice.com/mobile";
