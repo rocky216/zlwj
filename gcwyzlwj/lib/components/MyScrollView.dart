@@ -68,7 +68,12 @@ class MyScrollView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scrollbar(
           child: SingleChildScrollView(
-            child: this.child,
+            child: GestureDetector(
+              onTap: (){
+                FocusScope.of(context).requestFocus(FocusNode());
+              },
+              child: this.child,
+            ),
           )
         );
   }

@@ -2,21 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:gcwyzlwj/components/MyCard.dart';
 import 'package:gcwyzlwj/components/MyEmpty.dart';
 import 'package:gcwyzlwj/components/MyHeader.dart';
-import 'package:gcwyzlwj/components/MyStoreList.dart';
 import 'package:gcwyzlwj/redux/crmt/middleware.dart';
 import 'package:gcwyzlwj/redux/export.dart';
 import 'package:gcwyzlwj/utils/index.dart';
 
-class CrmtExamerr extends StatefulWidget {
+class CrmtExamincome extends StatefulWidget {
   final arguments;
 
-  CrmtExamerr({Key key, this.arguments}) : super(key: key);
+  CrmtExamincome({Key key, this.arguments}) : super(key: key);
 
   @override
-  _CrmtExamerrState createState() => _CrmtExamerrState();
+  _CrmtExamincomeState createState() => _CrmtExamincomeState();
 }
 
-class _CrmtExamerrState extends State<CrmtExamerr> {
+class _CrmtExamincomeState extends State<CrmtExamincome> {
   String heName;
   @override
   void initState() {
@@ -24,12 +23,6 @@ class _CrmtExamerrState extends State<CrmtExamerr> {
     super.initState();
     this.getHe();
   }
-   @override
-  void dispose() { 
-    super.dispose();
-    StoreProvider.of<IndexState>(context).dispatch( getExamerrData({},clear: true) );
-  }
-  
 
   getHe() async {
     Map userInfo = await getUserInfo();
@@ -56,10 +49,10 @@ class _CrmtExamerrState extends State<CrmtExamerr> {
     );
   }
 
-  initial(current){
-    StoreProvider.of<IndexState>(context).dispatch( getExamerrOrder(context, params: {
-      "pageSize": "6",
-      "current": current,
+  initial(date){
+    StoreProvider.of<IndexState>(context).dispatch( getExamincomeOrder(context, params: {
+      "pageSize": "10",
+      "current": 1,
     }) );
   }
 
@@ -110,27 +103,25 @@ class _CrmtExamerrState extends State<CrmtExamerr> {
       ),
       body: StoreConnector<IndexState, Map>(
         onInit: (Store store){
-          initial(1);
+          DateTime d = new DateTime.now();
+          String date = d.toString().substring(0,10);
+          initial(date);
         },
         onDispose: (Store store){
-          store.dispatch( getExamerrData({}, clear: true) );
+          store.dispatch( getExamincomeData({}, clear: true) );
         },
-        converter: (store)=>store.state.crmt.examerr, 
+        converter: (store)=>store.state.crmt.examincome, 
         builder: (BuildContext context, state){
           return state == null || state.isEmpty?MyEmpty()
-            :MyStoreList(
-              data: state, 
-              getMore: (current){
-                initial(current);
-              },
-              itemBuilder: (int index){
-                List dataList = state["list"];
+            :ListView.separated(
+              itemBuilder: (BuildContext context, int index){
+                List dataList=state["list"];
                 return Container(
                   padding: EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
                   child: MaterialButton(
                     padding: EdgeInsets.all(0),
                     onPressed: (){
-                      Navigator.of(context).pushNamed("/crmt/examerr/detail", arguments: dataList[index]);
+                      Navigator.of(context).pushNamed("/crmt/examincome/detail", arguments: dataList[index]);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -182,7 +173,7 @@ class _CrmtExamerrState extends State<CrmtExamerr> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    Text(dataList[index]["paymentRange"].toString(), style: TextStyle(color: Color(0xFF666666)),),
+                                    Text(dataList[index]["orderTitle"].toString(), style: TextStyle(color: Color(0xFF666666)),),
                                     Text("￥${dataList[index]["orderTrueFee"]}", style: TextStyle(color: Colors.red),)
                                   ],
                                 ),
@@ -192,7 +183,7 @@ class _CrmtExamerrState extends State<CrmtExamerr> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Text(dataList[index]["updateFeeStatusStr"].toString(), style: TextStyle(color: Color(0xFF666666)),),
-                                    Text("审核异常物业费订单", style: TextStyle(color: Colors.red, fontSize: 12),)
+                                    Text("审核收入", style: TextStyle(color: Colors.red, fontSize: 12),)
                                   ],
                                 ),
                               ),
@@ -204,8 +195,10 @@ class _CrmtExamerrState extends State<CrmtExamerr> {
                   ),
                 );
               }, 
-              
-              );
+              separatorBuilder: (BuildContext context, int index){
+                return Container(height: 5.0, color: Color(0xFFdddddd),);
+              }, 
+              itemCount: state["list"].length);
         }
       ),
     );

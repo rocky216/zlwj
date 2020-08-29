@@ -3,6 +3,7 @@ import 'package:gcwyzlwj/components/MyCard.dart';
 import 'package:gcwyzlwj/components/MyHeader.dart';
 import 'package:gcwyzlwj/components/MyScrollView.dart';
 import 'package:gcwyzlwj/pages/home/Crmt.dart';
+import 'package:gcwyzlwj/pages/home/Daily.dart';
 import 'package:gcwyzlwj/pages/home/DrawerPart.dart';
 import 'package:gcwyzlwj/redux/export.dart';
 import 'package:gcwyzlwj/utils/index.dart';
@@ -55,6 +56,7 @@ class _HomePageState extends State<HomePage> {
           builder: (context, state){
             return Column(
               children: <Widget>[
+                HomeDaily(),
                 HomeCrmt(),
               ],
             );

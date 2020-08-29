@@ -19,3 +19,13 @@ class CrmtExamerrAction {
   Map examerr;
   CrmtExamerrAction(this.examerr);
 }
+
+class CrmtExamexpendAction {
+  Map examexpend;
+  CrmtExamexpendAction(this.examexpend);
+}
+
+class CrmtExamincomeAction {
+  Map examincome;
+  CrmtExamincomeAction(this.examincome);
+}

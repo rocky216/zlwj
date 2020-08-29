@@ -11,10 +11,11 @@ class HomeCrmt extends StatefulWidget {
 class _HomeCrmtState extends State<HomeCrmt> {
   List<Map> list = [
     {"name": "收支管理", "color": Color(0xFF02a7f0), "link": "/crmt/fee"},
-    {"name": "其他支出订单", "color": Color(0xFFf59a23), "link": "/crmt/expend"},
-    {"name": "其他收入订单", "color": Color(0xFF00bfbf), "link": "/crmt/income"},
-    {"name": "审核异常订单", "color": Color(0xFFd9001b), "link": "/crmt/examerr"},
-    {"name": "审核支出订单", "color": Color(0xFF1a00d9), "link": "/crmt/fee"},
+    {"name": "其他支出", "color": Color(0xFFf59a23), "link": "/crmt/expend"},
+    {"name": "其他收入", "color": Color(0xFF00bfbf), "link": "/crmt/income"},
+    {"name": "物业费待审核", "color": Color(0xFFd9001b), "link": "/crmt/examerr"},
+    {"name": "审核支出", "color": Color(0xFF1a00d9), "link": "/crmt/examexpend"},
+    {"name": "其他收入待审核", "color": Color(0xFF02a7f0), "link": "/crmt/examincome"},
   ];
 
 

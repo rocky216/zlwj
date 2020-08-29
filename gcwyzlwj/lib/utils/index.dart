@@ -1,7 +1,23 @@
 import 'dart:convert' as convert;
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
+
+
+/* 提示框 */
+showToast(msg){
+  Fluttertoast.showToast(
+    msg: msg,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.CENTER,
+    timeInSecForIosWeb: 1,
+    backgroundColor: Color(0x90000000),
+    textColor: Colors.white,
+    fontSize: 16.0
+  );
+}
 
 /* 获取用户信息 */
 Future<Map<String, dynamic>> getUserInfo() async {

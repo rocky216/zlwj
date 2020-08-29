@@ -130,71 +130,76 @@ class _CrmtExpendState extends State<CrmtExpend> {
               return index==0? getStatics(state): 
               Container(
                 padding: EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Container(
-                      width: 40.0,
-                      child: Column(
-                        children: <Widget>[
-                          this.getStatus(dataList[index-1]),
-                          Container(
-                            margin: EdgeInsets.only(top:5.0),
-                            decoration: BoxDecoration(border: Border.all(color: Color(0xFFf54123)),
-                            borderRadius: BorderRadius.all(Radius.circular(2))),
-                            child: Text(dataList[index-1]["type"], style: TextStyle(color: Color(0xFFf54123), fontSize: 12),),
-                          )
-                        ],
+                child: MaterialButton(
+                  padding: EdgeInsets.all(0),
+                  onPressed: (){
+                    Navigator.of(context).pushNamed("/crmt/expend/detail", arguments: dataList[index-1]);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Container(
+                        width: 40.0,
+                        child: Column(
+                          children: <Widget>[
+                            this.getStatus(dataList[index-1]),
+                            Container(
+                              margin: EdgeInsets.only(top:5.0),
+                              decoration: BoxDecoration(border: Border.all(color: Color(0xFFf54123)),
+                              borderRadius: BorderRadius.all(Radius.circular(2))),
+                              child: Text(dataList[index-1]["type"], style: TextStyle(color: Color(0xFFf54123), fontSize: 12),),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    Container(
-                      width: 320.0,
-                      padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.only(bottom: 3.0),
-                            decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Color(0xFFdddddd)))),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(dataList[index-1]["orderNo"], style: TextStyle(fontWeight: FontWeight.w600),),
-                                Text(dataList[index-1]["buildTime"].substring(11), style: TextStyle(color: Color(0xFF666666)),)
-                              ],
+                      Container(
+                        width: 280.0,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.only(bottom: 3.0),
+                              decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Color(0xFFdddddd)))),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(dataList[index-1]["orderNo"], style: TextStyle(fontWeight: FontWeight.w600),),
+                                  Text(dataList[index-1]["buildTime"].substring(11), style: TextStyle(color: Color(0xFF666666)),)
+                                ],
+                              ),
                             ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.fromLTRB(0, 3.0, 0, 3.0),
-                            decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Color(0xFFdddddd)))),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(dataList[index-1]["code"], style: TextStyle(color: Color(0xFF666666))),
-                                Text(dataList[index-1]["partner"], style: TextStyle(color: Color(0xFF666666)))
-                              ],
+                            Container(
+                              padding: EdgeInsets.fromLTRB(0, 3.0, 0, 3.0),
+                              decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Color(0xFFdddddd)))),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(dataList[index-1]["code"], style: TextStyle(color: Color(0xFF666666))),
+                                  Text(dataList[index-1]["partner"], style: TextStyle(color: Color(0xFF666666)))
+                                ],
+                              ),
                             ),
-                          ),
-                          Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(dataList[index-1]["orderTitle"].toString(), style: TextStyle(color: Color(0xFF666666)),),
-                                Container(
-                                  child: Row(
-                                    children: <Widget>[
-                                      Text(dataList[index-1]["reviewer"], style: TextStyle(fontSize: 11, color: Color(0xFF666666)), ),
-                                      Text("￥${dataList[index-1]["orderTrueFee"]}", style: TextStyle(color: Colors.red),)
-                                    ],
-                                  ),
-                                )
-                              ],
+                            Container(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(dataList[index-1]["orderTitle"].toString(), style: TextStyle(color: Color(0xFF666666)),),
+                                  Container(
+                                    child: Row(
+                                      children: <Widget>[
+                                        Text(dataList[index-1]["reviewer"], style: TextStyle(fontSize: 11, color: Color(0xFF666666)), ),
+                                        Text("￥${dataList[index-1]["orderTrueFee"]}", style: TextStyle(color: Colors.red),)
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               );
             }, 

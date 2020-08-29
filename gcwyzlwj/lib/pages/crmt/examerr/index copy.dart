@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gcwyzlwj/components/MyCard.dart';
 import 'package:gcwyzlwj/components/MyEmpty.dart';
 import 'package:gcwyzlwj/components/MyHeader.dart';
-import 'package:gcwyzlwj/components/MyStoreList.dart';
 import 'package:gcwyzlwj/redux/crmt/middleware.dart';
 import 'package:gcwyzlwj/redux/export.dart';
 import 'package:gcwyzlwj/utils/index.dart';
@@ -56,10 +55,10 @@ class _CrmtExamerrState extends State<CrmtExamerr> {
     );
   }
 
-  initial(current){
+  initial(date){
     StoreProvider.of<IndexState>(context).dispatch( getExamerrOrder(context, params: {
-      "pageSize": "6",
-      "current": current,
+      "pageSize": "10",
+      "current": 1,
     }) );
   }
 
@@ -110,7 +109,9 @@ class _CrmtExamerrState extends State<CrmtExamerr> {
       ),
       body: StoreConnector<IndexState, Map>(
         onInit: (Store store){
-          initial(1);
+          DateTime d = new DateTime.now();
+          String date = d.toString().substring(0,10);
+          initial(date);
         },
         onDispose: (Store store){
           store.dispatch( getExamerrData({}, clear: true) );
@@ -118,13 +119,9 @@ class _CrmtExamerrState extends State<CrmtExamerr> {
         converter: (store)=>store.state.crmt.examerr, 
         builder: (BuildContext context, state){
           return state == null || state.isEmpty?MyEmpty()
-            :MyStoreList(
-              data: state, 
-              getMore: (current){
-                initial(current);
-              },
-              itemBuilder: (int index){
-                List dataList = state["list"];
+            :ListView.separated(
+              itemBuilder: (BuildContext context, int index){
+                List dataList=state["list"];
                 return Container(
                   padding: EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
                   child: MaterialButton(
@@ -204,8 +201,10 @@ class _CrmtExamerrState extends State<CrmtExamerr> {
                   ),
                 );
               }, 
-              
-              );
+              separatorBuilder: (BuildContext context, int index){
+                return Container(height: 5.0, color: Color(0xFFdddddd),);
+              }, 
+              itemCount: state["list"].length);
         }
       ),
     );
