@@ -130,7 +130,9 @@ class _SetClockPageState extends State<SetClockPage> {
                   ],
                 ),
               ),
-              _loc==null?Container()
+              _loc==null?Container(
+                child: Text("正在定位..."),
+              )
               :Container(
                 margin: EdgeInsets.only(top:30.0),
                 child: Column(

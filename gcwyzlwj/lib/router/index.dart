@@ -15,6 +15,7 @@ import 'package:gcwyzlwj/pages/crmt/fee/index.dart';
 import 'package:gcwyzlwj/pages/crmt/income/detail.dart';
 import 'package:gcwyzlwj/pages/crmt/income/index.dart';
 import 'package:gcwyzlwj/pages/daily/clock/index.dart';
+import 'package:gcwyzlwj/pages/daily/clock/record.dart';
 import 'package:gcwyzlwj/pages/daily/setclock/index.dart';
 import 'package:gcwyzlwj/pages/index.dart';
 import 'package:gcwyzlwj/pages/launch/index.dart';
@@ -39,6 +40,7 @@ var routes = {
   "/crmt/examincome/detail": (context, arguments)=> CrmtExamincomeDetail(arguments: arguments),
   "/daily/setclock": (context)=> SetClockPage(),
   "/daily/clock": (context)=> DailyClock(),
+  "/daily/clock/record": (context)=> ClockRecord(),
 };
 
 

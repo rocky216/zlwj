@@ -24,6 +24,12 @@ class _MyStoreListState extends State<MyStoreList> {
   }
 
   getMore(){
+    if(widget.data["total"] == widget.data["list"].length) {
+      setState(() {
+        this.bBtn=false;
+      });
+      return;
+    }
     _controller.addListener((){
       if(this.bBtn && _controller.position.pixels == _controller.position.maxScrollExtent){
         if(widget.data["total"] == widget.data["list"].length) {
@@ -45,7 +51,6 @@ class _MyStoreListState extends State<MyStoreList> {
          controller: _controller,
           itemBuilder: (BuildContext context, int index){
             if(index == widget.data["list"].length){
-              print(111);
               return MyPullLoad(dataList: widget.data["list"], bBtn: this.bBtn);
             }
             return widget.itemBuilder(index);

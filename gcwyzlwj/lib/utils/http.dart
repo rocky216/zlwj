@@ -29,7 +29,7 @@ class NetHttp {
     final userInfo = await getUserInfo();
 
     params["token"] = userInfo!= null?userInfo["token"]:null;
-    params["heId"] = userInfo!= null?userInfo["nowHe"]["id"]:null;
+    // params["heId"] = userInfo!= null?userInfo["nowHe"]["id"]:null;
     try{
       EasyLoading.show();
       Response response = await instance().request(
