@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gcwyzlwj/pages/auth/login.dart';
-import 'package:gcwyzlwj/pages/clock/index.dart';
 import 'package:gcwyzlwj/pages/crmt/examerr/detail.dart';
 import 'package:gcwyzlwj/pages/crmt/examerr/index.dart';
 import 'package:gcwyzlwj/pages/crmt/examexpend/detail.dart';
@@ -24,7 +23,6 @@ import 'package:gcwyzlwj/pages/launch/index.dart';
 var routes = {
   "/index": (context)=> IndexPage(),
   "/launch": (context)=> LaunchPage(),
-  "/clock": (context)=> ClockPage(),
   "/login": (context)=> LoginPage(),
   "/crmt/fee": (context, arguments)=> CrmtList(arguments: arguments),
   "/crmt/fee/detail": (context, arguments)=> CrmtFeeDetail(arguments: arguments),

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:amap_location/amap_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -9,7 +10,10 @@ import 'package:gcwyzlwj/router/index.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main(){
-  // AMapLocationClient.setApiKey("bd6e7c2182f28d71cc59ca386c18dab2");
+  if(Platform.isIOS){
+    AMapLocationClient.setApiKey(amapKey);
+  }
+  
   if(Platform.isAndroid){
     SystemUiOverlayStyle systemUiOverlayStyle =
         SystemUiOverlayStyle(statusBarColor: Colors.white);
@@ -48,7 +52,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primaryColor: Color(0xFF2c4d7f),
             ),
-            initialRoute: "/index",
+            initialRoute: "/login",
             onGenerateRoute: onGenerateRoute,
           )
         ),
