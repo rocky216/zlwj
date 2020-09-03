@@ -15,6 +15,9 @@ import 'package:gcwyzlwj/pages/crmt/income/detail.dart';
 import 'package:gcwyzlwj/pages/crmt/income/index.dart';
 import 'package:gcwyzlwj/pages/daily/clock/index.dart';
 import 'package:gcwyzlwj/pages/daily/clock/record.dart';
+import 'package:gcwyzlwj/pages/daily/patrol/detail.dart';
+import 'package:gcwyzlwj/pages/daily/patrol/index.dart';
+import 'package:gcwyzlwj/pages/daily/plate/index.dart';
 import 'package:gcwyzlwj/pages/daily/setclock/index.dart';
 import 'package:gcwyzlwj/pages/index.dart';
 import 'package:gcwyzlwj/pages/launch/index.dart';
@@ -39,6 +42,9 @@ var routes = {
   "/daily/setclock": (context)=> SetClockPage(),
   "/daily/clock": (context)=> DailyClock(),
   "/daily/clock/record": (context)=> ClockRecord(),
+  "/daily/plate": (context)=> DailyPlate(),
+  "/daily/patrol": (context)=> DailyPatrol(),
+  "/daily/patroldetail": (context, arguments)=> PatrolDetail(arguments: arguments),
 };
 
 

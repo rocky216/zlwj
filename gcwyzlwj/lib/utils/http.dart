@@ -5,8 +5,11 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gcwyzlwj/config/base.dart';
 import 'package:gcwyzlwj/utils/index.dart';
+import 'dart:convert' as convert;
 
 class NetHttp {
+  static const CONTENT_TYPE_JSON = 'application/json';
+  static const CONTENT_TYPE_FORM = 'application/x-www-form-urlencoded';
 
   static showToast(msg){
     Fluttertoast.showToast(
@@ -22,9 +25,11 @@ class NetHttp {
 
   static Future<T> request<T> (String url, context, {
     String method="get",
-    @required Map<String, dynamic> params
+    @required Map<String, dynamic> params,
+    contentType,
   }) async {
     /* 配置网络配置 */
+    
     final options = Options(method: method);
     final userInfo = await getUserInfo();
 
@@ -37,9 +42,10 @@ class NetHttp {
         queryParameters: params,
         options: options
       );
-      
+      if(response.data is String){
+        response.data = convert.jsonDecode(response.data);
+      }
       if(response.data["code"] == 2){
-        response.data["data"] = null;
         Navigator.of(context).pushNamedAndRemoveUntil("/login", (route)=>false );
       }else if(response.data["code"] == 0 || response.data["code"] == -1){
         showToast(response.data["msg"]);

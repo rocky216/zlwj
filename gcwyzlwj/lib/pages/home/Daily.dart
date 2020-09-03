@@ -11,6 +11,8 @@ class HomeDaily extends StatefulWidget {
 class _HomeDailyState extends State<HomeDaily> {
   List<Map> list = [
     {"name": "考勤打卡", "color": Color(0xFF02a7f0), "link": "/daily/clock"},
+    {"name": "车牌查询", "color": Color(0xFF02a7f0), "link": "/daily/plate"},
+    {"name": "保安巡更", "color": Color(0xFF02a7f0), "link": "/daily/patrol"},
     {"name": "打卡设置", "color": Color(0xFF02a7f0), "link": "/daily/setclock"},
   ];
 

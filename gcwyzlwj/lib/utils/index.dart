@@ -1,10 +1,46 @@
 import 'dart:convert' as convert;
+import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gcwyzlwj/config/base.dart';
+import 'package:gcwyzlwj/utils/http.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-
+/* 上传图片 */
+Future uploadImg(type, {next}) async {
+  PickedFile pickedFile;
+  if(type=="image"){
+    pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+  }else{
+    pickedFile = await ImagePicker().getImage(source: ImageSource.camera);
+  }
+  
+  File compressedFile = await FlutterNativeImage.compressImage(pickedFile.path,
+    quality: 80, percentage: 70); 
+  
+    FormData formData = new FormData.fromMap({ 
+      "fileSize": 1024*10,
+      "fileType": "photo",
+      "file": await MultipartFile.fromFile(compressedFile.path) //Image.file(image) new File(path)
+    });
+    Dio dio = new Dio();
+    var respone = await dio.post<String>(baseResources+"/resource/file/uploadFile", data: formData);
+    if(respone != null){
+      var data = convert.jsonDecode(respone.data);
+      
+      if(data["code"]==0){
+        return data["data"];
+      }else{
+        showToast(data["msg"]);
+      }
+    }
+    
+    
+}
 
 /* 提示框 */
 showToast(msg){
