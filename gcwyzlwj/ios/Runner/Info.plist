@@ -43,5 +43,11 @@
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>定位打卡</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>位您的当前位置打卡</string>
+	<key>NSLocationUsageDescription</key>
+	<string>定位打卡</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>定位打卡</string>
 </dict>
 </plist>

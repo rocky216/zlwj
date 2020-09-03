@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:amap_location/amap_location.dart';
 import 'package:connectivity/connectivity.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:gcwyzlwj/components/MyBetweeItem.dart';
 import 'package:gcwyzlwj/components/MyHeader.dart';
 import 'package:gcwyzlwj/components/MyScrollView.dart';
+import 'package:gcwyzlwj/config/base.dart';
 import 'package:gcwyzlwj/utils/http.dart';
 import 'package:gcwyzlwj/utils/index.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -30,6 +32,7 @@ class _SetClockPageState extends State<SetClockPage> {
     super.initState();
     this.getHe();
     this.getLocation();
+    this.getWifi();
     _connectivitySubscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       this.getWifi();
     });
@@ -56,6 +59,7 @@ class _SetClockPageState extends State<SetClockPage> {
      var wifiBSSID = await (Connectivity().getWifiBSSID());
      var wifiIP = await (Connectivity().getWifiIP());
      var wifiName = await (Connectivity().getWifiName());
+     
      setState(() {
        this.wifiBSSID = wifiBSSID;
        this.wifiIP = wifiIP;
@@ -70,15 +74,21 @@ class _SetClockPageState extends State<SetClockPage> {
       Permission.location,
       Permission.storage,
     ].request();
-    
+    if(Platform.isIOS){
+      print(1212);
+      await AMapLocationClient.setApiKey(amapKey);
+    }
     await AMapLocationClient.startup(new AMapLocationOption( 
       desiredAccuracy:CLLocationAccuracy.kCLLocationAccuracyHundredMeters  ));
       var loc = await AMapLocationClient.getLocation(true);
+      
       setState(() {
         _loc = loc;
       });
     AMapLocationClient.onLocationUpate.listen((AMapLocation loc){
+      print(11111);
       if(!mounted)return;
+      print(11111);
       setState(() {
         _loc = loc;
       });
@@ -124,9 +134,9 @@ class _SetClockPageState extends State<SetClockPage> {
               Container(
                 child: Column(
                   children: <Widget>[
-                    MyBetweeItem(title: "wifi名称", value: wifiName,),
-                    MyBetweeItem(title: "wifiIP", value: wifiIP,),
-                    MyBetweeItem(title: "wifiBSSID", value: wifiBSSID,),
+                    MyBetweeItem(title: "wifi名称", value: wifiName??"",),
+                    MyBetweeItem(title: "wifiIP", value: wifiIP??"",),
+                    MyBetweeItem(title: "wifiBSSID", value: wifiBSSID??"",),
                   ],
                 ),
               ),
@@ -141,7 +151,7 @@ class _SetClockPageState extends State<SetClockPage> {
                     MyBetweeItem(title: "纬度", value: _loc.latitude.toString(),),
                     Container(
                       margin: EdgeInsets.only(top: 15.0),
-                      child: Text(_loc.formattedAddress),
+                      child: Text(_loc.formattedAddress??""),
                     )
                   ],
                 ),
