@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
 
     return AnnotatedRegion(
       value: SystemUiOverlayStyle.dark,
@@ -52,7 +51,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primaryColor: Color(0xFF2c4d7f),
             ),
-            initialRoute: "/login",
+            initialRoute: "/index",
             onGenerateRoute: onGenerateRoute,
           )
         ),

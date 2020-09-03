@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:gcwyzlwj/utils/index.dart';
 
 class LaunchPage extends StatefulWidget {
   LaunchPage({Key key}) : super(key: key);
@@ -14,22 +14,23 @@ class _LaunchPageState extends State<LaunchPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    this.isLogin();
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
+  isLogin() async {
+    var userInfo = await getUserInfo();
+    if(userInfo == null){
+      Navigator.of(context).pushNamedAndRemoveUntil("/login", (route)=>false);
+    }else{
+      Navigator.of(context).pushNamedAndRemoveUntil("/index", (route)=>false);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("启动页"),
-      ),
       body: new Center(
-        child: Text("sa")
+        child: Text("正在加载数据。。。")
       ),
     );
   }
