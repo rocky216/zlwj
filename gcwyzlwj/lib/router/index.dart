@@ -17,6 +17,7 @@ import 'package:gcwyzlwj/pages/daily/clock/index.dart';
 import 'package:gcwyzlwj/pages/daily/clock/record.dart';
 import 'package:gcwyzlwj/pages/daily/patrol/detail.dart';
 import 'package:gcwyzlwj/pages/daily/patrol/index.dart';
+import 'package:gcwyzlwj/pages/daily/patrol/recordDetail.dart';
 import 'package:gcwyzlwj/pages/daily/plate/index.dart';
 import 'package:gcwyzlwj/pages/daily/setclock/index.dart';
 import 'package:gcwyzlwj/pages/index.dart';
@@ -45,6 +46,7 @@ var routes = {
   "/daily/plate": (context)=> DailyPlate(),
   "/daily/patrol": (context)=> DailyPatrol(),
   "/daily/patroldetail": (context, arguments)=> PatrolDetail(arguments: arguments),
+  "/daily/patrolrecord/detail": (context, arguments)=> PatrolRecordDetail(arguments: arguments),
 };
 
 
