@@ -34,6 +34,7 @@ class _PatrolDetailState extends State<PatrolDetail> {
       "recordId": id
     });
     if(data != null){
+      
       setState(() {
         this.noCompleted=data["noCompleted"];
         this.completed=data["completed"];
@@ -64,6 +65,7 @@ class _PatrolDetailState extends State<PatrolDetail> {
 
   @override
   Widget build(BuildContext context) {
+    print(completed);
     return Scaffold(
       appBar: MyHeader(
         title: Text(widget.arguments["name"])
@@ -94,8 +96,7 @@ class _PatrolDetailState extends State<PatrolDetail> {
             ),
             Container(
               child: Column(
-                children: noCompleted.isEmpty?[]
-                :(status?completed:noCompleted).asMap().keys.map((index){
+                children: (status?completed:noCompleted).asMap().keys.map((index){
                   return Container(
                     padding: EdgeInsets.all(8.0),
                     decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 3.0, color: Color(0xFFdddddd)))),
@@ -136,21 +137,21 @@ class _PatrolDetailState extends State<PatrolDetail> {
             ),
             
 
-            Container(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    child: TextField(),
-                  ),
-                  Container(
-                    width: 230.0,
-                    child: RaisedButton(onPressed: (){
+            // Container(
+            //   child: Column(
+            //     children: <Widget>[
+            //       Container(
+            //         child: TextField(),
+            //       ),
+            //       Container(
+            //         width: 230.0,
+            //         child: RaisedButton(onPressed: (){
 
-                    }, child: Text("强制完结巡更")),
-                  )
-                ],
-              ),
-            )
+            //         }, child: Text("强制完结巡更")),
+            //       )
+            //     ],
+            //   ),
+            // )
           ],
         ),
       )
