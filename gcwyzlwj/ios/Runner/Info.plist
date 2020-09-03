@@ -49,5 +49,9 @@
 	<string>定位打卡</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>定位打卡</string>
+	<key>NSCameraUsageDescription</key>
+	<string>请求您的相机权限扫一扫</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>请求图片库权限上传头像</string>
 </dict>
 </plist>
