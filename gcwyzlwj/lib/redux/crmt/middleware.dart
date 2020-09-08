@@ -40,7 +40,7 @@ ThunkAction<IndexState> getIncomeOrder(context, {@required params, next}){
 ThunkAction<IndexState> getExamerrOrder(context, {@required params, next}){
   return (Store<IndexState> store) async {
     try{  
-      var map = store.state.crmt.examerr;
+      var map = store.state.crmt.examerr; 
       var data = await NetHttp.request("/api/app/property/propertyOrder/reviewed", context, params: params);
       if(map == null){
         store.dispatch(CrmtExamerrAction(data));

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gcwyzlwj/components/MyShowImage.dart';
 import 'package:gcwyzlwj/pages/auth/login.dart';
 import 'package:gcwyzlwj/pages/crmt/examerr/detail.dart';
 import 'package:gcwyzlwj/pages/crmt/examerr/index.dart';
@@ -15,6 +16,8 @@ import 'package:gcwyzlwj/pages/crmt/income/detail.dart';
 import 'package:gcwyzlwj/pages/crmt/income/index.dart';
 import 'package:gcwyzlwj/pages/daily/clock/index.dart';
 import 'package:gcwyzlwj/pages/daily/clock/record.dart';
+import 'package:gcwyzlwj/pages/daily/inspect/add.dart';
+import 'package:gcwyzlwj/pages/daily/inspect/index.dart';
 import 'package:gcwyzlwj/pages/daily/patrol/detail.dart';
 import 'package:gcwyzlwj/pages/daily/patrol/index.dart';
 import 'package:gcwyzlwj/pages/daily/patrol/recordDetail.dart';
@@ -22,6 +25,13 @@ import 'package:gcwyzlwj/pages/daily/plate/index.dart';
 import 'package:gcwyzlwj/pages/daily/setclock/index.dart';
 import 'package:gcwyzlwj/pages/index.dart';
 import 'package:gcwyzlwj/pages/launch/index.dart';
+import 'package:gcwyzlwj/pages/news/detail.dart';
+import 'package:gcwyzlwj/pages/repair/all/detail.dart';
+import 'package:gcwyzlwj/pages/repair/all/index.dart';
+import 'package:gcwyzlwj/pages/repair/person/add.dart';
+import 'package:gcwyzlwj/pages/repair/person/detail.dart';
+import 'package:gcwyzlwj/pages/repair/person/index.dart';
+import 'package:gcwyzlwj/pages/user/userInfo.dart';
 
 
 var routes = {
@@ -47,6 +57,16 @@ var routes = {
   "/daily/patrol": (context)=> DailyPatrol(),
   "/daily/patroldetail": (context, arguments)=> PatrolDetail(arguments: arguments),
   "/daily/patrolrecord/detail": (context, arguments)=> PatrolRecordDetail(arguments: arguments),
+  "/daily/inspect": (context)=> DailyInspect(),
+  "/daily/inspect/add": (context)=> AddDailyInspect(),
+  "/repair/person": (context)=> PersonRepair(),
+  "/repair/person/add": (context, arguments)=> AddPersonRepair(arguments: arguments),
+  "/repair/all": (context)=> AllRepair(),
+  "/user/userinfo": (context)=>UserInfoPage(),
+  "/news/detail": (context, arguments)=>NewDetailPage(arguments: arguments),
+  "/repair/alldetail": (context, arguments)=>RepairDetailPage(arguments: arguments),
+  "/repair/persondetail": (context, arguments)=>RepairPersonDetailPage(arguments: arguments),
+  "/showimg": (context, arguments)=>MyShowImage(arguments: arguments)
 };
 
 

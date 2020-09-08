@@ -5,8 +5,9 @@ class MyStoreList extends StatefulWidget {
   final Map data;
   final Function itemBuilder;
   final Function getMore;
+  final  first;
 
-  MyStoreList({Key key, @required this.data, @required this.getMore, @required this.itemBuilder}) : super(key: key);
+  MyStoreList({Key key, @required this.data, @required this.getMore, @required this.itemBuilder, this.first}) : super(key: key);
 
   @override
   _MyStoreListState createState() => _MyStoreListState();
@@ -24,14 +25,14 @@ class _MyStoreListState extends State<MyStoreList> {
   }
 
   getMore(){
-    if(widget.data["total"] == widget.data["list"].length) {
-      setState(() {
-        this.bBtn=false;
-      });
-      return;
-    }
+    // if(widget.data["total"] == widget.data["list"].length) {
+    //   setState(() {
+    //     this.bBtn=false;
+    //   });
+    // }
     _controller.addListener((){
       if(this.bBtn && _controller.position.pixels == _controller.position.maxScrollExtent){
+        
         if(widget.data["total"] == widget.data["list"].length) {
           setState(() {
             this.bBtn=false;
@@ -50,15 +51,24 @@ class _MyStoreListState extends State<MyStoreList> {
        child: ListView.separated(
          controller: _controller,
           itemBuilder: (BuildContext context, int index){
-            if(index == widget.data["list"].length){
+            if(index == widget.data["list"].length+(widget.first != null?1:0)){
+              if(widget.data["total"] == widget.data["list"].length){
+                return Container();
+              }
               return MyPullLoad(dataList: widget.data["list"], bBtn: this.bBtn);
             }
-            return widget.itemBuilder(index);
+            
+            if(widget.first != null && index==0){
+              return widget.first;
+            }else{
+              return widget.itemBuilder(index);
+            }
+            
           },
           separatorBuilder: (BuildContext context, int index){
             return Container(height: 5.0, color: Color(0xFFdddddd),);
           },
-          itemCount: widget.data["list"].length+1
+          itemCount: widget.data["list"].length+(widget.first != null?2:1)
        ),
     );
   }
