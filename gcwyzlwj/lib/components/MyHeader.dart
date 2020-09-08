@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:gcwyzlwj/utils/index.dart';
 
 class MyHeader extends StatefulWidget implements PreferredSizeWidget {
   final Widget title;
   final Widget leading;
   final Widget actions;
+  final bool isHe;
 
-  MyHeader({Key key, this.title, this.leading, this.actions}) : super(key: key);
+  MyHeader({Key key, this.title, this.leading, this.actions, this.isHe=false}) : super(key: key);
 
   @override
   _MyHeaderState createState() => _MyHeaderState();
@@ -16,6 +18,23 @@ class MyHeader extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _MyHeaderState extends State<MyHeader> {
+  String heName="";
+
+  @override
+  void initState() { 
+    super.initState();
+    this.getHe();
+  }
+
+  getHe() async {
+    Map userInfo = await getUserInfo();
+    if(userInfo != null){
+      setState(() {
+        heName = userInfo["nowHe"]["name"];
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return new SafeArea(
@@ -39,7 +58,9 @@ class _MyHeaderState extends State<MyHeader> {
                     ),
                   ):Padding(child: Container(),padding: EdgeInsets.only(left: 0.0),),
                   widget.leading!=null?widget.leading:Container(),
-                  widget.title!=null?widget.title:Container(),
+                  widget.title!=null?
+                    widget.isHe?Row(children: <Widget>[Text(heName, style: TextStyle(color: Colors.blue),),widget.title],):widget.title
+                  :Container(),
                 ],
               )
             ),

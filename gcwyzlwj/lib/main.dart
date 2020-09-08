@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
             locale: Locale("zh"),
             title: '智联万家',
             theme: ThemeData(
-              primaryColor: Color(0xFF2c4d7f),
+              primaryColor: Colors.blue,
             ),
             initialRoute: "/index",
             onGenerateRoute: onGenerateRoute,

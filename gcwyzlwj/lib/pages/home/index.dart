@@ -5,6 +5,7 @@ import 'package:gcwyzlwj/components/MyScrollView.dart';
 import 'package:gcwyzlwj/pages/home/Crmt.dart';
 import 'package:gcwyzlwj/pages/home/Daily.dart';
 import 'package:gcwyzlwj/pages/home/DrawerPart.dart';
+import 'package:gcwyzlwj/pages/home/Repair.dart';
 import 'package:gcwyzlwj/redux/export.dart';
 import 'package:gcwyzlwj/utils/index.dart';
 
@@ -59,6 +60,7 @@ class _HomePageState extends State<HomePage> {
             return Column(
               children: <Widget>[
                 HomeDaily(),
+                Repair(),
                 HomeCrmt(),
               ],
             );

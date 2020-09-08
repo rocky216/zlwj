@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:gcwyzlwj/components/MyCard.dart';
 
-class HomeDaily extends StatefulWidget {
-  HomeDaily({Key key}) : super(key: key);
+class Repair extends StatefulWidget {
+  Repair({Key key}) : super(key: key);
 
   @override
-  _HomeDailyState createState() => _HomeDailyState();
+  _RepairState createState() => _RepairState();
 }
 
-class _HomeDailyState extends State<HomeDaily> {
+class _RepairState extends State<Repair> {
   List<Map> list = [
-    {"name": "考勤打卡", "color": Color(0xFFf439a3), "link": "/daily/clock"},
-    {"name": "车牌查询", "color": Color(0xFFf4cf39), "link": "/daily/plate"},
-    {"name": "保安巡更", "color": Color(0xFF7b39f4), "link": "/daily/patrol"},
-    {"name": "空置房巡查", "color": Color(0xFF02a7f0), "link": "/daily/inspect"},
-    {"name": "打卡设置", "color": Color(0xFFf46e39), "link": "/daily/setclock"},
+    {"name": "我的报修", "color": Color(0xFFf439a3), "link": "/repair/person"},
+    {"name": "全部报修", "color": Color(0xFFf4cf39), "link": "/repair/all"},
   ];
-
 
   @override
   Widget build(BuildContext context) {
