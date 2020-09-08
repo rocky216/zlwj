@@ -45,6 +45,7 @@ class NetHttp {
       if(response.data is String){
         response.data = convert.jsonDecode(response.data);
       }
+      
       if(response.data["code"] == 2){
         Navigator.of(context).pushNamedAndRemoveUntil("/login", (route)=>false );
       }else if(response.data["code"] == 0 || response.data["code"] == -1){

@@ -50,6 +50,7 @@ class _PatrolRecordDetailState extends State<PatrolRecordDetail> {
       "imgUrl": url,
       "recordId": widget.arguments["id"],
     });
+    
     if(data != null){
       showToast("巡查成功！");
       initial();

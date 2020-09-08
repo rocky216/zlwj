@@ -22,7 +22,9 @@ class _HomePageState extends State<HomePage> {
   void initState() { 
     super.initState();
     this.getCurrentHe();
+    
   }
+  
 
   getCurrentHe() async {
     Map<String, dynamic> map = await getUserInfo();

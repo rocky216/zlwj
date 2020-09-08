@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:amap_location/amap_location.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gcwyzlwj/components/MyBetweeItem.dart';
 import 'package:gcwyzlwj/components/MyHeader.dart';
 import 'package:gcwyzlwj/components/MyScrollView.dart';
@@ -36,6 +37,15 @@ class _SetClockPageState extends State<SetClockPage> {
     _connectivitySubscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       this.getWifi();
     });
+    Fluttertoast.showToast(
+        msg: "This is Center Short Toast",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
   }
 
   getHe() async {

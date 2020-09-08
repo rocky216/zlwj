@@ -32,7 +32,7 @@ dependencies:
   permission_handler: ^5.0.1+1
   connectivity: ^0.4.9+2
   shared_preferences: ^0.5.10
-  fluttertoast: ^7.0.2
+  fluttertoast: ^4.0.1
   flutter_easyloading: ^1.1.4
   redux: ^4.0.0+3
   flutter_redux: ^0.6.0
