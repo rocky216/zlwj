@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:gcwyzlwj/utils/index.dart';
+import 'package:jpush_flutter/jpush_flutter.dart';
+
 
 class LaunchPage extends StatefulWidget {
   LaunchPage({Key key}) : super(key: key);
@@ -10,12 +12,15 @@ class LaunchPage extends StatefulWidget {
 }
 
 class _LaunchPageState extends State<LaunchPage> {
+  
 @override
   void initState() {
     // TODO: implement initState
     super.initState();
     this.isLogin();
   }
+
+  
 
   isLogin() async {
     var userInfo = await getUserInfo();

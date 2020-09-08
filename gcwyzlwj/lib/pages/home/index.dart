@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gcwyzlwj/components/MyCard.dart';
 import 'package:gcwyzlwj/components/MyHeader.dart';
 import 'package:gcwyzlwj/components/MyScrollView.dart';
 import 'package:gcwyzlwj/pages/home/Crmt.dart';
@@ -23,8 +22,8 @@ class _HomePageState extends State<HomePage> {
   void initState() { 
     super.initState();
     this.getCurrentHe();
-    
   }
+
   
 
   getCurrentHe() async {

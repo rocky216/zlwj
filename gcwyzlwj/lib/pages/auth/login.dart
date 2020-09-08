@@ -34,7 +34,10 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyHeader(
-        title: Text("登录"),
+        title: Container(
+          margin: EdgeInsets.only(left: 10.0),
+          child: Text("用户登录"),
+        ),
       ),
       body: MyScrollView(
         child: Container(
@@ -45,12 +48,12 @@ class _LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: "手机号",
-                    hintText: "请输入手机号！",
+                    labelText: "用户名字",
+                    hintText: "请输入用户名字！",
                     icon: Icon(Icons.person),
                   ),
                   validator: (v){
-                    return v.trim().length>0?null:"手机号不能为空！";
+                    return v.trim().length>0?null:"用户名字不能为空！";
                   },
                   onChanged: (v){
                     setState(() {
@@ -59,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                   },
                 ),
                 TextFormField(
+                  obscureText: true,
                   decoration: InputDecoration(labelText: "密码", hintText: "请输入密码！", icon: Icon(Icons.lock)),
                   validator: (v){
                     return v.trim().length>0?null:"密码不能为空！";
