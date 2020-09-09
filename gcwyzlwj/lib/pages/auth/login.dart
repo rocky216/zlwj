@@ -17,6 +17,20 @@ class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String _phone;
   String _password;
+  String rid;
+  @override
+  void initState() { 
+    super.initState();
+    this.getRid();
+    
+  }
+  getRid(){
+    initPlatformState(context, next: (rid){
+      setState(() {
+        this.rid=rid;
+      });
+    });
+  }
 
   goLogin() async {
     
@@ -25,7 +39,6 @@ class _LoginPageState extends State<LoginPage> {
       
     if(data!=null){
       await setUserInfo(data);
-      print(111);
       Navigator.of(context).pushNamedAndRemoveUntil("/index", (route)=>false);
     }
   }
@@ -73,7 +86,27 @@ class _LoginPageState extends State<LoginPage> {
                     });
                   },
                 ),
-                SizedBox(height: 20,),
+                SizedBox(height: 10,),
+                
+                Container(
+                    margin: EdgeInsets.fromLTRB(0, 10.0, 0, 10.0),
+                    padding: EdgeInsets.only(left: 40.0),
+                    child: Row(
+                      children: <Widget>[
+                        Text("登录即代表您已同意", style: TextStyle(color: Color(0xFF999999), fontSize: 12.0),),
+                        Container(
+                          width: 160.0,
+                          child: GestureDetector(child: Text("《用户隐私权限与协议》", 
+                              style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 12.0)),
+                            onTap: (){
+                              Navigator.of(context).pushNamed("/agreement");
+                            },
+                          ),
+                        )
+                      ],
+                    )
+                  ),
+                SizedBox(height: 10,),
                 Container(
                   padding: EdgeInsets.only(left: 38.0),
                   width: double.infinity,

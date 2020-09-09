@@ -8,7 +8,6 @@ import 'package:gcwyzlwj/config/base.dart';
 import 'package:gcwyzlwj/redux/store.dart';
 import 'package:gcwyzlwj/router/index.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:jpush_flutter/jpush_flutter.dart';
 
 void main(){
   if(Platform.isIOS){
@@ -31,57 +30,15 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final JPush jpush = new JPush();
+  
 
   @override
   void initState() { 
     super.initState();
-    this.initPlatformState();
+    
   }
 
-  Future<void> initPlatformState() async {
-    String platformVersion;
-
-    try {
-      jpush.addEventHandler(
-          onReceiveNotification: (Map<String, dynamic> message) async {
-        print("接收通知: $message");
-        
-      }, onOpenNotification: (Map<String, dynamic> message) async {
-        print("打开通知: $message");
-        
-      }, onReceiveMessage: (Map<String, dynamic> message) async {
-        print("接收消息: $message");
-       
-      }, onReceiveNotificationAuthorization:
-              (Map<String, dynamic> message) async {
-        print("授权接收通知: $message");
-        
-      });
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    jpush.setup(
-      appKey: "58d210ba92ddb2b79fd84286", //你自己应用的 AppKey
-      channel: "theChannel",
-      production: false,
-      debug: true,
-    );
-    jpush.applyPushAuthority(
-        new NotificationSettingsIOS(sound: true, alert: true, badge: true));
-
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    jpush.getRegistrationID().then((rid) {
-      print("获取RegistrationID: $rid");
-    });
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-  }
+  
 
   @override
   Widget build(BuildContext context) {

@@ -31,9 +31,9 @@ class _MyStoreListState extends State<MyStoreList> {
     //   });
     // }
     _controller.addListener((){
-      if(this.bBtn && _controller.position.pixels == _controller.position.maxScrollExtent){
+      if(_controller.position.pixels == _controller.position.maxScrollExtent){
         
-        if(widget.data["total"] == widget.data["list"].length) {
+        if(widget.data["total"] <= widget.data["list"].length) {
           setState(() {
             this.bBtn=false;
           });
@@ -48,28 +48,33 @@ class _MyStoreListState extends State<MyStoreList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-       child: ListView.separated(
-         controller: _controller,
-          itemBuilder: (BuildContext context, int index){
-            if(index == widget.data["list"].length+(widget.first != null?1:0)){
-              if(widget.data["total"] == widget.data["list"].length){
-                return Container();
-              }
-              return MyPullLoad(dataList: widget.data["list"], bBtn: this.bBtn);
-            }
-            
-            if(widget.first != null && index==0){
-              return widget.first;
-            }else{
-              return widget.itemBuilder(index);
-            }
-            
+       child: RefreshIndicator( 
+          onRefresh: () async {
+            widget.getMore(1);
           },
-          separatorBuilder: (BuildContext context, int index){
-            return Container(height: 5.0, color: Color(0xFFdddddd),);
-          },
-          itemCount: widget.data["list"].length+(widget.first != null?2:1)
-       ),
+          child: ListView.separated(
+            controller: _controller,
+              itemBuilder: (BuildContext context, int index){
+                if(index == widget.data["list"].length+(widget.first != null?1:0)){
+                  if(widget.data["total"] == widget.data["list"].length){
+                    return Container();
+                  }
+                  return MyPullLoad(dataList: widget.data["list"], bBtn: this.bBtn);
+                }
+                
+                if(widget.first != null && index==0){
+                  return widget.first;
+                }else{
+                  return widget.itemBuilder(index);
+                }
+                
+              },
+              separatorBuilder: (BuildContext context, int index){
+                return Container(height: 5.0, color: Color(0xFFdddddd),);
+              },
+              itemCount: widget.data["list"].length+(widget.first != null?2:1)
+          ),  
+        ),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:gcwyzlwj/components/MyHeader.dart';
 import 'package:gcwyzlwj/components/MyInput.dart';
 import 'package:gcwyzlwj/components/MyScrollView.dart';
 import 'package:gcwyzlwj/redux/export.dart';
+import 'package:gcwyzlwj/utils/index.dart';
 
 class UserPage extends StatefulWidget {
   UserPage({Key key}) : super(key: key);
@@ -22,9 +23,12 @@ class _UserPageState extends State<UserPage> {
         ),
         actions: MaterialButton(
           onPressed: (){
-
+            popconfirm(context, title: Text("是否退出登录？", style: TextStyle(fontSize: 16.0),), next: () async {
+              await removeUserInfo();
+              Navigator.of(context).pushNamedAndRemoveUntil("/login", (route)=>false);
+            });
           },
-          child: Text("退出", ),
+          child: Text("退出登录", ),
         ),
       ),
       body: MyScrollView(
@@ -54,6 +58,8 @@ class _UserPageState extends State<UserPage> {
                             Row(
                               children: <Widget>[
                                 CircleAvatar(
+                                  child: Icon(Icons.person, color: Colors.grey,),
+                                  backgroundColor: Color(0xFFeeeeee),
                                   backgroundImage: state!=null && state["userHeadUrl"].isNotEmpty?NetworkImage(state["userHeadUrl"]):null,
                                 ),
                                 Container(
@@ -72,6 +78,20 @@ class _UserPageState extends State<UserPage> {
                           ],
                         ),
                       ),
+                    ),
+                  ),
+                  Card(
+                    child: Column(
+                      children: <Widget>[
+                        ListTile(
+                          onTap: (){
+                            Navigator.of(context).pushNamed("/agreement");
+                          },
+                          leading: Icon(IconData(0xe67e, fontFamily: 'AntdIcons'), color: Color(0xFF777777), size: 20.0,),
+                          title: Text("用户隐私协议", style: TextStyle(fontSize: 14.0),),
+                          trailing: Icon(Icons.chevron_right),
+                        )
+                      ],
                     ),
                   )
                 ],

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gcwyzlwj/components/MyShowImage.dart';
+import 'package:gcwyzlwj/pages/auth/agreement.dart';
 import 'package:gcwyzlwj/pages/auth/login.dart';
 import 'package:gcwyzlwj/pages/crmt/examerr/detail.dart';
 import 'package:gcwyzlwj/pages/crmt/examerr/index.dart';
@@ -66,7 +67,8 @@ var routes = {
   "/news/detail": (context, arguments)=>NewDetailPage(arguments: arguments),
   "/repair/alldetail": (context, arguments)=>RepairDetailPage(arguments: arguments),
   "/repair/persondetail": (context, arguments)=>RepairPersonDetailPage(arguments: arguments),
-  "/showimg": (context, arguments)=>MyShowImage(arguments: arguments)
+  "/showimg": (context, arguments)=>MyShowImage(arguments: arguments),
+  "/agreement": (context)=>UserAgreement()
 };
 
 
