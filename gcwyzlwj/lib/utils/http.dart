@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gcwyzlwj/config/base.dart';
+import 'package:gcwyzlwj/pages/auth/login.dart';
 import 'package:gcwyzlwj/utils/index.dart';
 import 'dart:convert' as convert;
 
@@ -42,9 +43,11 @@ class NetHttp {
         queryParameters: params,
         options: options
       );
+
       if(response.data is String){
         response.data = convert.jsonDecode(response.data);
       }
+      
       
       if(response.data["code"] == 2){
         Navigator.of(context).pushNamedAndRemoveUntil("/login", (route)=>false );

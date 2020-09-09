@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:gcwyzlwj/components/MyAgreement.dart';
 import 'package:gcwyzlwj/pages/home/index.dart';
 import 'package:gcwyzlwj/pages/maillist/index.dart';
 import 'package:gcwyzlwj/pages/news/index.dart';
 import 'package:gcwyzlwj/pages/user/index.dart';
+import 'package:gcwyzlwj/utils/index.dart';
 
 class IndexPage extends StatefulWidget {
   IndexPage({Key key}) : super(key: key);
@@ -16,6 +19,25 @@ class _IndexPageState extends State<IndexPage> {
   int _currentIndex = 1;
 
   List<Widget> tabs = [NewsPage(), HomePage(), MailList(), UserPage()];
+  
+  @override
+  void initState() { 
+    super.initState();
+    this.tipsAgreement();
+  }
+
+  tipsAgreement() async {
+      var agree = await getAgreement();
+      if(agree==null){
+        popconfirm(context, title: Text("用户协议"), content: Container(
+          child: MyAgreement(),
+        ), onCancel: () async {
+          await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+        }, next: () async {
+          await setAgreement();
+        });
+      }
+    }
   
 
   @override

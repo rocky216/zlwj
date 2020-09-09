@@ -17,7 +17,7 @@ class _RepairState extends State<Repair> {
   @override
   Widget build(BuildContext context) {
     return MyCard(
-      title: Text("日常管理", style: TextStyle(fontWeight: FontWeight.w600),),
+      title: Text("报修管理", style: TextStyle(fontWeight: FontWeight.w600),),
       child: Wrap(
         children: list.map((f){
           return Container(

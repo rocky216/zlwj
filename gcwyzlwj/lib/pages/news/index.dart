@@ -33,7 +33,9 @@ class _NewsPageState extends State<NewsPage> {
       body: Container(
         child: StoreConnector<IndexState, Map>(
           onInit: (Store store){
-            initial(1);
+            if(store.state.app.news==null){
+              initial(1);
+            }
           },
           converter: (Store store)=>store.state.app.news,
           builder: (BuildContext context, state){
