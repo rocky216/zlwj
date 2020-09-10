@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gcwyzlwj/components/MyHeader.dart';
 import 'package:gcwyzlwj/components/MyScrollView.dart';
@@ -33,9 +34,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   goLogin() async {
-    
-    var data =  await NetHttp.request<Map>("/api/app/property/login", context, method: "post", 
-      params: {"account": _phone, "passWord": _password});
+    var data =  await NetHttp.request<Map>("/api/app/property/login", context, method: "post", params: {
+        "account": _phone, 
+        "passWord": _password,
+        "registrationId": this.rid,
+        "registrationType": Platform.isIOS?"ios":"android"
+      });
       
     if(data!=null){
       await setUserInfo(data);
