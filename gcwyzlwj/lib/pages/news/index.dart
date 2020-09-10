@@ -60,7 +60,7 @@ class _NewsPageState extends State<NewsPage> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(dataList[index]["msgInfo"], overflow: TextOverflow.ellipsis, maxLines: 2,),
+                      Text(dataList[index]["msgInfo"], overflow: TextOverflow.ellipsis, maxLines: 2, style: TextStyle(fontSize: 14.0),),
                       Container(
                         child: Wrap(
                           children: <Widget>[

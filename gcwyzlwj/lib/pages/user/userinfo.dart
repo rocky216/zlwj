@@ -30,7 +30,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
   }
 
   submit() async {
-    var data = NetHttp.request("/api/app/property/message/updateUserInfo", context, method: "post", params: {
+    var data = await NetHttp.request("/api/app/property/message/updateUserInfo", context, method: "post", params: {
       "nickName": nickNameController.text,
       "phone": phoneController.text,
       "headUrl": this.url??"",

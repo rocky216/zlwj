@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   goLogin() async {
-    var data =  await NetHttp.request<Map>("/api/app/property/login", context, method: "post", params: {
+    var data =  await NetHttp.request<Map>("/api/app/property/login", context, method: "post", params: { 
         "account": _phone, 
         "passWord": _password,
         "registrationId": this.rid,

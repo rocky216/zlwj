@@ -13,6 +13,7 @@ import 'package:gcwyzlwj/utils/http.dart';
 import 'package:gcwyzlwj/utils/index.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+
 class SetClockPage extends StatefulWidget {
   SetClockPage({Key key}) : super(key: key);
 
@@ -37,15 +38,6 @@ class _SetClockPageState extends State<SetClockPage> {
     _connectivitySubscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       this.getWifi();
     });
-    Fluttertoast.showToast(
-        msg: "This is Center Short Toast",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0
-    );
   }
 
   getHe() async {

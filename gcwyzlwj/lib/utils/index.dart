@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gcwyzlwj/config/base.dart';
+import 'package:gcwyzlwj/pages/index.dart';
 import 'package:gcwyzlwj/utils/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
@@ -58,7 +59,11 @@ Future<void> initPlatformState(context, {Function next}) async {
         
       }, onOpenNotification: (Map<String, dynamic> message) async {
         print("打开通知: $message");
-        Navigator.of(context).pushNamedAndRemoveUntil("/index", (route)=>false);
+        Navigator.pushAndRemoveUntil(
+          context,
+          new MaterialPageRoute(builder: (context) => new IndexPage()),
+          (route) => route == null,
+        );
         
       }, onReceiveMessage: (Map<String, dynamic> message) async {
         print("接收消息: $message");
@@ -96,32 +101,38 @@ Future<void> initPlatformState(context, {Function next}) async {
 
 /* 上传图片 */
 Future uploadImg(type, {next}) async {
-  PickedFile pickedFile;
-  if(type=="image"){
-    pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
-  }else{
-    pickedFile = await ImagePicker().getImage(source: ImageSource.camera);
+  try{
+
+    PickedFile pickedFile;
+    if(type=="image"){
+      pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+    }else{
+      pickedFile = await ImagePicker().getImage(source: ImageSource.camera);
+    }
+    File compressedFile = await FlutterNativeImage.compressImage(pickedFile.path,
+      quality: 80, percentage: 70); 
+    
+      FormData formData = new FormData.fromMap({ 
+        "fileSize": 1024*10,
+        "fileType": "photo",
+        "file": await MultipartFile.fromFile(compressedFile.path) //Image.file(image) new File(path)
+      });
+      Dio dio = new Dio();
+      var respone = await dio.post<String>(baseResources+"/resource/file/uploadFile", data: formData);
+      if(respone != null){
+        var data = convert.jsonDecode(respone.data);
+        
+        if(data["code"]==0){
+          return data["data"];
+        }else{
+          showToast(data["msg"]);
+        }
+      }
+
+  }catch(e){
+    
   }
   
-  File compressedFile = await FlutterNativeImage.compressImage(pickedFile.path,
-    quality: 80, percentage: 70); 
-  
-    FormData formData = new FormData.fromMap({ 
-      "fileSize": 1024*10,
-      "fileType": "photo",
-      "file": await MultipartFile.fromFile(compressedFile.path) //Image.file(image) new File(path)
-    });
-    Dio dio = new Dio();
-    var respone = await dio.post<String>(baseResources+"/resource/file/uploadFile", data: formData);
-    if(respone != null){
-      var data = convert.jsonDecode(respone.data);
-      
-      if(data["code"]==0){
-        return data["data"];
-      }else{
-        showToast(data["msg"]);
-      }
-    }
     
     
 }

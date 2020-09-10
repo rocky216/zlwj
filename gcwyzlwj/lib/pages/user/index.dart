@@ -58,7 +58,7 @@ class _UserPageState extends State<UserPage> {
                             Row(
                               children: <Widget>[
                                 CircleAvatar(
-                                  child: Icon(Icons.person, color: Colors.grey,),
+                                  child: Icon(Icons.person, color: state!=null && state["userHeadUrl"].isNotEmpty?Color(0x0cdddddd):Colors.grey,),
                                   backgroundColor: Color(0xFFeeeeee),
                                   backgroundImage: state!=null && state["userHeadUrl"].isNotEmpty?NetworkImage(state["userHeadUrl"]):null,
                                 ),
@@ -83,6 +83,14 @@ class _UserPageState extends State<UserPage> {
                   Card(
                     child: Column(
                       children: <Widget>[
+                        ListTile(
+                          onTap: (){
+                            Navigator.of(context).pushNamed("/user/setpassword");
+                          },
+                          leading: Icon(Icons.lock, color: Color(0xFF777777), size: 20.0,),
+                          title: Text("设置密码", style: TextStyle(fontSize: 14.0),),
+                          trailing: Icon(Icons.chevron_right),
+                        ),
                         ListTile(
                           onTap: (){
                             Navigator.of(context).pushNamed("/agreement");

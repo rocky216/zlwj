@@ -45,7 +45,7 @@ class _PatrolRecordDetailState extends State<PatrolRecordDetail> {
   }
 
   toCompleted(code) async {
-    var url = await uploadImg("image");
+    var url = await uploadImg("camera");
     var data = await NetHttp.request("/api/app/property/ppPatrolRecordPoint/complete", context, method: "post", params: {
       "recordId": "",
       "code": code,

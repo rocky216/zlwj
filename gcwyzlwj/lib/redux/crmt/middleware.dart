@@ -42,7 +42,7 @@ ThunkAction<IndexState> getExamerrOrder(context, {@required params, next}){
     try{  
       var map = store.state.crmt.examerr; 
       var data = await NetHttp.request("/api/app/property/propertyOrder/reviewed", context, params: params);
-      if(map == null){
+      if(map == null || params["current"]==1 ){
         store.dispatch(CrmtExamerrAction(data));
       }else{
         map["list"].addAll(data["list"]);
@@ -72,7 +72,7 @@ ThunkAction<IndexState> getExamexpendOrder(context, {@required params, next}){
     try{  
       var map = store.state.crmt.examexpend;
       var data = await NetHttp.request("/api/app/property/otherPay/reviewed", context, params: params);
-      if(map == null){
+      if(map == null || params["current"]==1 ){
         store.dispatch(CrmtExamexpendAction(data));
       }else{
         map["list"].addAll(data["list"]);
@@ -105,7 +105,7 @@ ThunkAction<IndexState> getExamincomeOrder(context, {@required params, next}){
     try{  
       var map = store.state.crmt.examincome;
       var data = await NetHttp.request("/api/app/property/other/reviewed", context, params: params);
-      if(map == null){
+      if(map == null || params["current"]==1){
         store.dispatch(CrmtExamincomeAction(data));
       }else{
         map["list"].addAll(data["list"]);

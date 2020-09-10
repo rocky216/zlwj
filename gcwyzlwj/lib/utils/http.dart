@@ -51,7 +51,12 @@ class NetHttp {
       
       if(response.data["code"] == 2){
         removeUserInfo();
-        Navigator.of(context).pushNamedAndRemoveUntil("/login", (route)=>false );
+        Navigator.pushAndRemoveUntil(
+          context,
+          new MaterialPageRoute(builder: (context) => new LoginPage()),
+          (route) => route == null,
+        );
+        // Navigator.of(context).pushNamedAndRemoveUntil("/login", (route)=>false );
       }else if(response.data["code"] == 0 || response.data["code"] == -1){
         showToast(response.data["msg"]);
         response.data["data"] = null;

@@ -32,6 +32,7 @@ import 'package:gcwyzlwj/pages/repair/all/index.dart';
 import 'package:gcwyzlwj/pages/repair/person/add.dart';
 import 'package:gcwyzlwj/pages/repair/person/detail.dart';
 import 'package:gcwyzlwj/pages/repair/person/index.dart';
+import 'package:gcwyzlwj/pages/user/setpassword/index.dart';
 import 'package:gcwyzlwj/pages/user/userInfo.dart';
 
 
@@ -68,7 +69,8 @@ var routes = {
   "/repair/alldetail": (context, arguments)=>RepairDetailPage(arguments: arguments),
   "/repair/persondetail": (context, arguments)=>RepairPersonDetailPage(arguments: arguments),
   "/showimg": (context, arguments)=>MyShowImage(arguments: arguments),
-  "/agreement": (context)=>UserAgreement()
+  "/agreement": (context)=>UserAgreement(),
+  "/user/setpassword": (context)=>SetPassword(),
 };
 
 

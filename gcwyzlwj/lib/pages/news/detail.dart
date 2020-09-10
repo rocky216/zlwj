@@ -3,6 +3,7 @@ import 'package:gcwyzlwj/components/MyHeader.dart';
 import 'package:gcwyzlwj/components/MyInput.dart';
 import 'package:gcwyzlwj/components/MyScrollView.dart';
 import 'package:gcwyzlwj/components/MyTag.dart';
+import 'package:gcwyzlwj/components/MyUploadImg.dart';
 import 'package:gcwyzlwj/redux/export.dart';
 import 'package:gcwyzlwj/utils/http.dart';
 import 'package:gcwyzlwj/utils/index.dart';
@@ -58,22 +59,23 @@ class _NewDetailPageState extends State<NewDetailPage> {
 
   myAdd(){
     return Container(
-      child: MaterialButton(
-        onPressed: () async{
-          FocusScope.of(context).requestFocus(FocusNode());
-          var url = await uploadImg("image");
-            imgUrls.add(url);
-            setState(() {
-              imgUrls = imgUrls;
-            });
+      margin: EdgeInsets.only(left: 10.0),
+      child: MyUploadImg(
+        next: (url){
+          imgUrls.add(url);
+          setState(() {
+            imgUrls = imgUrls;
+          });
         },
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(6.0),
-          child: Container(
-            width: 60.0,
-            height: 60.0,
-            color: Colors.grey,
-            child: Icon(Icons.add, color: Colors.white, size: 30,),
+        child: Container(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(6.0),
+            child: Container(
+              width: 60.0,
+              height: 60.0,
+              color: Color(0xFFdddddd),
+              child: Icon(Icons.add, color: Colors.grey, size: 30,),
+            ),
           ),
         ),
       ),
@@ -131,9 +133,20 @@ class _NewDetailPageState extends State<NewDetailPage> {
                       child: Text(data["repairInfo"]),
                     ),
                     Container(
-                      child: Column(
+                      child: Wrap(
                         children: (data["imgSubUrls"] as List).map((f){
-                          return Image.network(f, fit: BoxFit.fill,);
+                          return Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.blue)
+                            ),
+                            margin: EdgeInsets.only(right: 5.0, bottom: 5.0),
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.of(context).pushNamed("/showimg", arguments: {"img": f});
+                              },
+                              child: Image.network(f, fit: BoxFit.cover, width: 105.0, height: 200.0,),
+                            ),
+                          );
                         }).toList(),
                       ),
                     ),
@@ -184,7 +197,7 @@ class _NewDetailPageState extends State<NewDetailPage> {
                                   ),
                                 );
                               }).toList()
-                              ..add(myAdd()),
+                              ..add(myAdd()), 
                             ),
                           )
                           :MyInput(label: Text("上传图片：", style: TextStyle(fontSize: 14.0),),

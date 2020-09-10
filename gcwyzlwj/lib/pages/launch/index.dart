@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gcwyzlwj/components/MyAgreement.dart';
 import 'package:gcwyzlwj/config/base.dart';
+import 'package:gcwyzlwj/pages/auth/login.dart';
+import 'package:gcwyzlwj/pages/index.dart';
 import 'package:gcwyzlwj/utils/http.dart';
 import 'package:gcwyzlwj/utils/index.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
@@ -44,6 +46,7 @@ class _LaunchPageState extends State<LaunchPage> {
         await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
       }, next: () async {
         await setAgreement();
+        Navigator.of(context).pushNamedAndRemoveUntil("/index", (route)=>false);
       });
     }
   }
@@ -52,10 +55,20 @@ class _LaunchPageState extends State<LaunchPage> {
   isLogin() async {
     var userInfo = await getUserInfo();
     if(userInfo == null){
-      Navigator.of(context).pushNamedAndRemoveUntil("/login", (route)=>false);
+      Navigator.pushAndRemoveUntil(
+        context,
+        new MaterialPageRoute(builder: (context) => new LoginPage()),
+        (route) => route == null,
+      );
+      // Navigator.of(context).pushNamedAndRemoveUntil("/login", (route)=>false);
     }else{
       this.tipsAgreement();
-      Navigator.of(context).pushNamedAndRemoveUntil("/index", (route)=>false);
+      Navigator.pushAndRemoveUntil(
+        context,
+        new MaterialPageRoute(builder: (context) => new IndexPage()),
+        (route) => route == null,
+      );
+      // Navigator.of(context).pushNamedAndRemoveUntil("/index", (route)=>false);
     }
   }
 

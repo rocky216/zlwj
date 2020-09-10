@@ -16,7 +16,7 @@ class IndexPage extends StatefulWidget {
 }
 
 class _IndexPageState extends State<IndexPage> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
 
   List<Widget> tabs = [NewsPage(), HomePage(), MailList(), UserPage()];
   
@@ -35,6 +35,7 @@ class _IndexPageState extends State<IndexPage> {
           await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
         }, next: () async {
           await setAgreement();
+          Navigator.of(context).pushNamedAndRemoveUntil("/index", (route)=>false);
         });
       }
     }

@@ -74,7 +74,7 @@ class _MailListState extends State<MailList> {
                 itemBuilder: (BuildContext context, index){
                   return ListTile(
                       leading: CircleAvatar(
-                        child: Icon(Icons.person, color: Colors.grey,),
+                        child: Icon(Icons.person, color: state[index]["headUrl"].isNotEmpty?Color(0x0cdddddd):Colors.grey,),
                         backgroundColor: Color(0xFFeeeeee),
                         backgroundImage: state[index]["headUrl"].isNotEmpty?NetworkImage(state[index]["headUrl"]):null,
                       ),
@@ -102,7 +102,7 @@ class _MailListState extends State<MailList> {
                 itemBuilder: (BuildContext context, index){
                   return ListTile(
                       leading: CircleAvatar(
-                        child: Icon(Icons.person, color: Colors.grey,),
+                        child: Icon(Icons.person, color: data[index]["headUrl"].isNotEmpty?Color(0x0cdddddd):Colors.grey,),
                         backgroundColor: Color(0xFFeeeeee),
                         backgroundImage: data[index]["headUrl"].isNotEmpty?NetworkImage(data[index]["headUrl"]):null,
                       ),

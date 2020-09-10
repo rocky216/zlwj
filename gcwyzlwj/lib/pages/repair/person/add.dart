@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gcwyzlwj/components/MyHeader.dart';
 import 'package:gcwyzlwj/components/MyInput.dart';
 import 'package:gcwyzlwj/components/MyScrollView.dart';
+import 'package:gcwyzlwj/components/MyUploadImg.dart';
 import 'package:gcwyzlwj/redux/export.dart';
 import 'package:gcwyzlwj/utils/http.dart';
 import 'package:gcwyzlwj/utils/index.dart';
@@ -40,22 +41,23 @@ getTypes() async {
 
   myAdd(){
     return Container(
-      child: MaterialButton(
-        onPressed: () async{
-          FocusScope.of(context).requestFocus(FocusNode());
-          var url = await uploadImg("image");
-            imgUrls.add(url);
-            setState(() {
-              imgUrls = imgUrls;
-            });
+      margin: EdgeInsets.only(left: 10.0),
+      child: MyUploadImg(
+        next: (url){
+          imgUrls.add(url);
+          setState(() {
+            imgUrls = imgUrls;
+          });
         },
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(6.0),
-          child: Container(
-            width: 60.0,
-            height: 60.0,
-            color: Colors.grey,
-            child: Icon(Icons.add, color: Colors.white, size: 30,),
+        child: Container(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(6.0),
+            child: Container(
+              width: 60.0,
+              height: 60.0,
+              color: Color(0xFFdddddd),
+              child: Icon(Icons.add, color: Colors.grey, size: 30,),
+            ),
           ),
         ),
       ),

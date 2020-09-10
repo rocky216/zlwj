@@ -53,6 +53,7 @@ class _MyStoreListState extends State<MyStoreList> {
             widget.getMore(1);
           },
           child: ListView.separated(
+            physics: AlwaysScrollableScrollPhysics(),
             controller: _controller,
               itemBuilder: (BuildContext context, int index){
                 if(index == widget.data["list"].length+(widget.first != null?1:0)){
