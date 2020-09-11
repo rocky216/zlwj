@@ -1,4 +1,6 @@
-
+import 'dart:isolate';
+import 'dart:ui';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gcwyzlwj/components/MyAgreement.dart';
@@ -7,7 +9,7 @@ import 'package:gcwyzlwj/pages/auth/login.dart';
 import 'package:gcwyzlwj/pages/index.dart';
 import 'package:gcwyzlwj/utils/http.dart';
 import 'package:gcwyzlwj/utils/index.dart';
-import 'package:jpush_flutter/jpush_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class LaunchPage extends StatefulWidget {
@@ -18,21 +20,38 @@ class LaunchPage extends StatefulWidget {
 }
 
 class _LaunchPageState extends State<LaunchPage> {
-  
-@override
+  List updateapp;
+
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    this.isLogin();
-    // this.appVersion();
+    
+    this.appVersion();
+    
   }
 
   appVersion() async {
     var data = await NetHttp.request("/api/app/property/common/app/version", context, params: {});
     if(data != null){
-      print(data);
       if(data["versionNo"] != version){
-
+        popconfirm(
+          context, 
+          title:Text("发现新版本，请及时更新？"),
+          confirm: FlatButton(
+            onPressed: () async {
+              if(Platform.isAndroid){
+                if (await canLaunch( data["appResourceUrl"] )) {
+                  await launch(data["appResourceUrl"]);
+                }
+              }
+              
+            }, 
+            child: Text("更新")),
+          cancel: Container()
+        );
+      }else{
+        this.isLogin();
       }
     }
   }
@@ -81,9 +100,4 @@ class _LaunchPageState extends State<LaunchPage> {
     );
   }
 
-
-  // void _checkPersmission() async {
-  //   bool hasPermission = 
-  //     await SimplePermissions.checkPermission(Permission.WhenInUseLocation);
-  // }
 }

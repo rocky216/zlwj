@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:amap_location/amap_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:gcwyzlwj/config/base.dart';
@@ -9,7 +10,7 @@ import 'package:gcwyzlwj/redux/store.dart';
 import 'package:gcwyzlwj/router/index.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main(){
+void main() async {
   if(Platform.isIOS){
     AMapLocationClient.setApiKey(amapKey);
   }
@@ -19,6 +20,10 @@ void main(){
         SystemUiOverlayStyle(statusBarColor: Colors.white);
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   }
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await FlutterDownloader.initialize(debug: true);
+
   return runApp(MyApp());
 }
 

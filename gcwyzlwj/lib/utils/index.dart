@@ -13,7 +13,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart';
 
 
-Future popconfirm(context, { @required Widget title, Function next,Function onCancel, Widget content}){
+Future popconfirm(context, { 
+    @required Widget title, 
+    Function next,
+    Function onCancel, 
+    Widget content, 
+    Widget confirm,
+    Widget cancel,
+  }){
   return showDialog(
     context: context,
     barrierDismissible: false,
@@ -24,6 +31,7 @@ Future popconfirm(context, { @required Widget title, Function next,Function onCa
             child: content,
         ):null,
         actions: <Widget>[
+          cancel == null?
           new FlatButton(
             child: new Text('取消'),
             onPressed: () {
@@ -32,7 +40,8 @@ Future popconfirm(context, { @required Widget title, Function next,Function onCa
               }
               Navigator.of(context).pop();
             },
-          ),
+          ):cancel,
+          confirm==null?
           new FlatButton(
             child: new Text('确定'),
             onPressed: () {
@@ -41,7 +50,7 @@ Future popconfirm(context, { @required Widget title, Function next,Function onCa
               }
               Navigator.of(context).pop();
             },
-          ),
+          ):confirm,
         ],
       );
     }
