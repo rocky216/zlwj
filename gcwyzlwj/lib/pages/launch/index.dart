@@ -44,6 +44,8 @@ class _LaunchPageState extends State<LaunchPage> {
                 if (await canLaunch( data["appResourceUrl"] )) {
                   await launch(data["appResourceUrl"]);
                 }
+              }else if(Platform.isIOS){
+                  await launch("itms-apps://itunes.apple.com/cn/app/id$appId?mt=8");
               }
               
             }, 
