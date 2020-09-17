@@ -55,6 +55,10 @@ class _PersonRepairState extends State<PersonRepair> with TickerProviderStateMix
         },
         converter: (Store store)=>store.state.repair.person,
         builder: (BuildContext context, state){
+          if(state != null){
+            print(state["total"]);
+            print(state["list"].length);
+          }
           
           return TabBarView(
             controller: _controller,

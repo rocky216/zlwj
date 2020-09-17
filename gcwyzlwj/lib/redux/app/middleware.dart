@@ -35,8 +35,8 @@ ThunkAction<IndexState> getNews(context, {@required params, next}){
       if(map == null || params["current"]==1 || params["current"]=="1"){
         store.dispatch( NewsListAction(data) );
       }else{
-        map["list"].addAll(data["list"]);
-        store.dispatch(NewsListAction(map));
+        data["list"].insertAll(0,map["list"]);
+        store.dispatch(NewsListAction(data));
       }
     }catch(e){
       print(e);

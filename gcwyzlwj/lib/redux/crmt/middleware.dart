@@ -45,8 +45,8 @@ ThunkAction<IndexState> getExamerrOrder(context, {@required params, next}){
       if(map == null || params["current"]==1 ){
         store.dispatch(CrmtExamerrAction(data));
       }else{
-        map["list"].addAll(data["list"]);
-        store.dispatch(CrmtExamerrAction(map));
+        data["list"].insertAll(0,map["list"]);
+        store.dispatch(CrmtExamerrAction(data));
       }
     }catch(e){
       print(e);
@@ -76,8 +76,8 @@ ThunkAction<IndexState> getExamexpendOrder(context, {@required params, next}){
       if(map == null || params["current"]==1 ){
         store.dispatch(CrmtExamexpendAction(data));
       }else{
-        map["list"].addAll(data["list"]);
-        store.dispatch(CrmtExamexpendAction(map));
+        data["list"].insertAll(0,map["list"]);
+        store.dispatch(CrmtExamexpendAction(data));
       }
       
     }catch(e){
@@ -110,8 +110,8 @@ ThunkAction<IndexState> getExamincomeOrder(context, {@required params, next}){
       if(map == null || params["current"]==1){
         store.dispatch(CrmtExamincomeAction(data));
       }else{
-        map["list"].addAll(data["list"]);
-        store.dispatch(CrmtExamincomeAction(map));
+        data["list"].insertAll(0,map["list"]);
+        store.dispatch(CrmtExamincomeAction(data));
       }
     }catch(e){
       print(e);

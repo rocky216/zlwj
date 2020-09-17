@@ -136,9 +136,14 @@ class _CrmtExamexpendDetailState extends State<CrmtExamexpendDetail> {
                         ],
                       ),
                     )
-                  ],
+                  ], 
                 )
               ),
+              Column(
+                children: (detail["enclosures"] as List).map((f){
+                  return Image.network(f, fit: BoxFit.cover,);
+                }).toList(),
+              )
             ],
           ),
         ),
