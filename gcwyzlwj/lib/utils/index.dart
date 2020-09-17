@@ -6,6 +6,7 @@ import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gcwyzlwj/config/base.dart';
 import 'package:gcwyzlwj/pages/index.dart';
+import 'package:gcwyzlwj/redux/export.dart';
 import 'package:gcwyzlwj/utils/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
@@ -68,11 +69,10 @@ Future<void> initPlatformState(context, {Function next}) async {
         
       }, onOpenNotification: (Map<String, dynamic> message) async {
         print("打开通知: $message");
-        Navigator.pushAndRemoveUntil(
-          context,
-          new MaterialPageRoute(builder: (context) => new IndexPage()),
-          (route) => route == null,
-        );
+        Navigator.of(context).pushNamedAndRemoveUntil("/index", (route)=>false);
+        StoreProvider.of<IndexState>(context).dispatch( getNews(context, params: {
+          "current": "1"
+        }) );
         
       }, onReceiveMessage: (Map<String, dynamic> message) async {
         print("接收消息: $message");
@@ -97,7 +97,9 @@ Future<void> initPlatformState(context, {Function next}) async {
 
     // Platform messages may fail, so we use a try/catch PlatformException.
     jpush.getRegistrationID().then((rid) {
-      next(rid);
+      if(next !=null){
+        next(rid);
+      }
       print("获取RegistrationID: $rid");
     });
 

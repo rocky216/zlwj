@@ -27,6 +27,9 @@ import 'package:gcwyzlwj/pages/daily/setclock/index.dart';
 import 'package:gcwyzlwj/pages/index.dart';
 import 'package:gcwyzlwj/pages/launch/index.dart';
 import 'package:gcwyzlwj/pages/news/detail.dart';
+import 'package:gcwyzlwj/pages/news/expenddetail.dart';
+import 'package:gcwyzlwj/pages/news/feedetail.dart';
+import 'package:gcwyzlwj/pages/news/incomedetail.dart';
 import 'package:gcwyzlwj/pages/repair/all/detail.dart';
 import 'package:gcwyzlwj/pages/repair/all/index.dart';
 import 'package:gcwyzlwj/pages/repair/person/add.dart';
@@ -66,6 +69,9 @@ var routes = {
   "/repair/all": (context)=> AllRepair(),
   "/user/userinfo": (context)=>UserInfoPage(),
   "/news/detail": (context, arguments)=>NewDetailPage(arguments: arguments),
+  "/news/feedetail": (context, arguments)=>NewFeeDetailPage(arguments: arguments),
+  "/news/expenddetail": (context, arguments)=>NewExpendDetailPage(arguments: arguments),
+  "/news/incomedetail": (context, arguments)=>NewIncomeDetailPage(arguments: arguments),
   "/repair/alldetail": (context, arguments)=>RepairDetailPage(arguments: arguments),
   "/repair/persondetail": (context, arguments)=>RepairPersonDetailPage(arguments: arguments),
   "/showimg": (context, arguments)=>MyShowImage(arguments: arguments),

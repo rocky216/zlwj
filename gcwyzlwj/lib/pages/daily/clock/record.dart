@@ -20,7 +20,7 @@ class _ClockRecordState extends State<ClockRecord> {
   }
 
   initial(date) async {
-    var data = await NetHttp.request("/api/app/property/clockRecord/listPage", context, params: {
+    var data = await NetHttp.request("/api/app/property/clockRecord/list", context, params: {
       "current": 1,
       "pageSize": "20",
       "time": "$date 23:59:59"
@@ -113,7 +113,7 @@ class _ClockRecordState extends State<ClockRecord> {
               Container(
                 child: Column(
                   children: data==null || data.isEmpty?[]
-                  :(data["data"]["list"] as List).map((f){
+                  :(data["heClockRecords"] as List).map((f){
                     return getStatus(f);
                   }).toList(),
                 ),

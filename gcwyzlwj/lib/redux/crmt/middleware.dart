@@ -59,6 +59,7 @@ ThunkAction<IndexState> getExamerrData(item, {bool clear=false}){
     if(!clear && map !=null && map["list"].isNotEmpty){
       var newList = map["list"].where((o)=>o["id"] != item["id"]).toList();
       map["list"] = newList;
+      map["total"] = map["total"]-1;
       store.dispatch(CrmtExamerrAction(map));
     }
     if(clear){
@@ -92,6 +93,7 @@ ThunkAction<IndexState> getExamexpendData(item, {bool clear=false}){
       var newList = map["list"].where((o)=>o["id"] != item["id"]).toList();
       
       map["list"] = newList;
+      map["total"] = map["total"]-1;
       store.dispatch(CrmtExamexpendAction(map));
     }
     if(clear){
@@ -124,6 +126,7 @@ ThunkAction<IndexState> getExamincomeData(item, {bool clear=false}){
       var newList = map["list"].where((o)=>o["id"] != item["id"]).toList();
       
       map["list"] = newList;
+      map["total"] = map["total"]-1;
       store.dispatch(CrmtExamincomeAction(map));
     }
     if(clear){

@@ -51,7 +51,6 @@ class _CrmtExamincomeState extends State<CrmtExamincome> {
 
   initial(date){
     StoreProvider.of<IndexState>(context).dispatch( getExamincomeOrder(context, params: {
-      "pageSize": "10",
       "current": 1,
     }) );
   }

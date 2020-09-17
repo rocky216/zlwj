@@ -51,7 +51,6 @@ class _CrmtIncomeState extends State<CrmtIncome> {
 
   initial(date){
     StoreProvider.of<IndexState>(context).dispatch( getIncomeOrder(context, params: {
-      "pageSize": 10,
       "current": 1,
       "time": "$date 23:59:59"
     }) );

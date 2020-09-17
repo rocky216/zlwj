@@ -63,7 +63,6 @@ submit() async {
     StoreProvider.of<IndexState>(context).dispatch( getInspects(context, params: {
       "current": 1,
       "time": "$date 23:59:59",
-      "pageSize": "10"
     }) );
   }
 }

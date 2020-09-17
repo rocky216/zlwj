@@ -17,7 +17,6 @@ class _NewsPageState extends State<NewsPage> {
   initial(current){
     StoreProvider.of<IndexState>(context).dispatch( getNews(context, params: {
       "current": current,
-      "pageSize":"10"
     }) );
   }
 
@@ -25,6 +24,7 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyHeader(
+        goback: false,
         title: Container(
           margin: EdgeInsets.only(left: 10.0),
           child: Text("我的消息"),
@@ -48,8 +48,19 @@ class _NewsPageState extends State<NewsPage> {
               itemBuilder: (index){
                 List dataList = state["list"];
                 return ListTile(
+                  // contentPadding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
                   onTap: (){
-                    Navigator.of(context).pushNamed("/news/detail", arguments: dataList[index]);
+                    if(dataList[index]["msgType"] == "checkOrder"){
+                      Navigator.of(context).pushNamed("/news/feedetail", arguments: dataList[index]);
+                    }else if(dataList[index]["msgType"] == "checkExpend"){
+                      Navigator.of(context).pushNamed("/news/expenddetail", arguments: dataList[index]);
+                    }else if( dataList[index]["msgType"] == "checkPay" ){
+                      Navigator.of(context).pushNamed("/news/incomedetail", arguments: dataList[index]);
+                    }
+                    else{
+                      Navigator.of(context).pushNamed("/news/detail", arguments: dataList[index]);
+                    }
+                    
                   },
                   trailing: Container(
                     width: 20.0,
@@ -62,6 +73,7 @@ class _NewsPageState extends State<NewsPage> {
                     children: <Widget>[
                       Text(dataList[index]["msgInfo"], overflow: TextOverflow.ellipsis, maxLines: 2, style: TextStyle(fontSize: 14.0),),
                       Container(
+                        padding: EdgeInsets.only(bottom: 5.0),
                         child: Wrap(
                           children: <Widget>[
                             Container(

@@ -203,10 +203,10 @@ class _DailyClockState extends State<DailyClock> {
                           Container(
                             child: MaterialButton(
                               onPressed: (){
-                                if(!btn1){
-                                  return;
+                                if(btn1 && setColor()){
+                                  setClock("goToWork");
                                 }
-                                setClock("goToWork");
+                                
                               },
                               child: CircleAvatar(
                                 backgroundColor: btn1 && setColor()?Colors.blue:Colors.grey,
@@ -218,10 +218,10 @@ class _DailyClockState extends State<DailyClock> {
                           Container(
                             child: MaterialButton(
                               onPressed: (){
-                                if(!btn2){
-                                  return;
+                                if(btn2 && setColor()){
+                                  setClock("goOffWork");
                                 }
-                                setClock("goOffWork");
+                                
                               },
                               child: CircleAvatar(
                                 backgroundColor: btn2 && setColor()?Colors.blue:Colors.grey,

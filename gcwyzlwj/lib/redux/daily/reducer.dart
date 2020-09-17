@@ -10,6 +10,6 @@ DailyState dailyReducer(DailyState state, action){
     return DailyState(inspect: action.inspect);
   }
 
-  return state;
+  return DailyState();
 
 }

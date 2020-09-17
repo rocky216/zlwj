@@ -82,6 +82,32 @@ class _CrmtIncomeDetailState extends State<CrmtIncomeDetail> {
                   ],
                 )
               ),
+              detail["orderStatus"] == 0?Container()
+              :MyCard(
+                title: Text("审核信息", style: TextStyle(fontWeight: FontWeight.w600),),
+                child: Column(
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        MyBetweeItem(title: "异常类型",value: detail["faOrderException"]["updateFeeStr"]??"",),
+                        MyCard(
+                          title: Text("异常说明", style: TextStyle(color: Color(0xFF666666)),),
+                          extra: Text(detail["submitInfo"]??"", style: TextStyle(fontSize: 12)),
+                          child: Text(detail["faOrderException"]["exceptionInfo"]??"",),
+                        ),
+                      ],
+                    ),
+                    detail["orderStatus"] == 1?Container()
+                    :MyCard(
+                      title: Text("审核说明", style: TextStyle(color: Color(0xFF666666)),),
+                      extra: Text(detail["examineInfo"]??"", style: TextStyle(fontSize: 12)),
+                      child: Container(
+                        child: Text(detail["faOrderException"]["checkInfo"]??""),
+                      ),
+                    ),
+                  ],
+                )
+              )
             ],
           ),
         ),

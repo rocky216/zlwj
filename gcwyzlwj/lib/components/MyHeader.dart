@@ -6,8 +6,9 @@ class MyHeader extends StatefulWidget implements PreferredSizeWidget {
   final Widget leading;
   final Widget actions;
   final bool isHe;
+  final  bool goback;
 
-  MyHeader({Key key, this.title, this.leading, this.actions, this.isHe=false}) : super(key: key);
+  MyHeader({Key key, this.title, this.leading, this.actions, this.isHe=false, this.goback=true}) : super(key: key);
 
   @override
   _MyHeaderState createState() => _MyHeaderState();
@@ -47,7 +48,7 @@ class _MyHeaderState extends State<MyHeader> {
             Container(
               child: Row(
                 children: <Widget>[
-                  Navigator.canPop(context)
+                  Navigator.canPop(context) && widget.goback
                   ?Container(
                       width: 50.0,
                       child: FlatButton(
