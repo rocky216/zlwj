@@ -15,7 +15,6 @@ class MyStoreList extends StatefulWidget {
 
 class _MyStoreListState extends State<MyStoreList> {
   ScrollController _controller = ScrollController();
-  int _current=1;
   bool bBtn=true;
 
   @override
@@ -39,8 +38,7 @@ class _MyStoreListState extends State<MyStoreList> {
           });
           return;
         }
-        this._current += 1;
-        widget.getMore(this._current);
+        widget.getMore(widget.data["current"]+1);
       }
     });
   }

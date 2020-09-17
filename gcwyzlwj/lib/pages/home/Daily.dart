@@ -12,10 +12,10 @@ class HomeDaily extends StatefulWidget {
 class _HomeDailyState extends State<HomeDaily> {
   List<Map> list = [
     {"name": "考勤打卡", "color": Color(0xFFf439a3), "link": "/daily/clock", "auth": "1-1"},
-    {"name": "车牌查询", "color": Color(0xFFf4cf39), "link": "/daily/plate", "auth": null},
-    {"name": "保安巡更", "color": Color(0xFF7b39f4), "link": "/daily/patrol", "auth": null},
-    {"name": "空置房巡查", "color": Color(0xFF02a7f0), "link": "/daily/inspect", "auth": null},
-    {"name": "打卡设置", "color": Color(0xFFf46e39), "link": "/daily/setclock", "auth": "1-3"},
+    {"name": "车牌查询", "color": Color(0xFFf4cf39), "link": "/daily/plate", "auth": "1-2"},
+    {"name": "保安巡更", "color": Color(0xFF7b39f4), "link": "/daily/patrol", "auth": "1-3"},
+    {"name": "空置房巡查", "color": Color(0xFF02a7f0), "link": "/daily/inspect", "auth": "1-4"},
+    {"name": "打卡设置", "color": Color(0xFFf46e39), "link": "/daily/setclock", "auth": "1-5"},
   ];
 
 

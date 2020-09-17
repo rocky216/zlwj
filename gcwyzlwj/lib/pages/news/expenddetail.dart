@@ -79,9 +79,7 @@ class _NewExpendDetailPageState extends State<NewExpendDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    if(detail!=null){
-      print(detail["enclosures"]);
-    }
+    
     
     return Scaffold(
       appBar: MyHeader(

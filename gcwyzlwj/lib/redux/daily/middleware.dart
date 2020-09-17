@@ -23,8 +23,8 @@ ThunkAction<IndexState> getInspects(context, {@required params, next}){
       if(map == null || params["current"]==1){
         store.dispatch(DailyInspectAction(data));
       }else{
-        map["list"].addAll(data["list"]);
-        store.dispatch(DailyInspectAction(map));
+        data["list"].insertAll(0,map["list"]);
+        store.dispatch(DailyInspectAction(data));
       }
     }catch(e){
       print(e);

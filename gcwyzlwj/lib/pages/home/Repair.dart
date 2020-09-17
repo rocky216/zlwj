@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gcwyzlwj/components/MyAuth.dart';
 import 'package:gcwyzlwj/components/MyCard.dart';
 
 class Repair extends StatefulWidget {
@@ -10,8 +11,8 @@ class Repair extends StatefulWidget {
 
 class _RepairState extends State<Repair> {
   List<Map> list = [
-    {"name": "我的报修", "color": Color(0xFFf439a3), "link": "/repair/person"},
-    {"name": "全部报修", "color": Color(0xFFf4cf39), "link": "/repair/all"},
+    {"name": "我的报修", "color": Color(0xFFf439a3), "link": "/repair/person", "auth": "3-1"},
+    {"name": "全部报修", "color": Color(0xFFf4cf39), "link": "/repair/all", "auth": "3-2"},
   ];
 
   @override
@@ -20,17 +21,20 @@ class _RepairState extends State<Repair> {
       title: Text("报修管理", style: TextStyle(fontWeight: FontWeight.w600),),
       child: Wrap(
         children: list.map((f){
-          return Container(
-            margin: EdgeInsets.only(bottom: 10),
-            child: FlatButton(onPressed: (){
-              Navigator.of(context).pushNamed(f["link"]);
-            }, 
-            child: Column(
-              children: <Widget>[
-                CircleAvatar(child: Icon(Icons.cloud, color: Colors.white,), radius: 20, backgroundColor: f["color"],),
-                Text(f["name"], style: TextStyle(fontSize: 11, color: Color(0XFF777777)),)
-              ],
-            )),
+          return MyAuth(
+            auth: f["auth"],
+            child: Container(
+              margin: EdgeInsets.only(bottom: 10),
+              child: FlatButton(onPressed: (){
+                Navigator.of(context).pushNamed(f["link"]);
+              }, 
+              child: Column(
+                children: <Widget>[
+                  CircleAvatar(child: Icon(Icons.cloud, color: Colors.white,), radius: 20, backgroundColor: f["color"],),
+                  Text(f["name"], style: TextStyle(fontSize: 11, color: Color(0XFF777777)),)
+                ],
+              )),
+            ),
           );
         }).toList(),
       ),

@@ -9,6 +9,7 @@ import 'package:gcwyzlwj/redux/export.dart';
 import 'package:gcwyzlwj/utils/http.dart';
 import 'package:gcwyzlwj/utils/index.dart';
 
+
 class AddDailyInspect extends StatefulWidget {
   AddDailyInspect({Key key}) : super(key: key);
 
@@ -75,7 +76,7 @@ submit() async {
         title: Text("新增空置房巡查"),
         actions: MaterialButton(onPressed: (){
           submit();
-        }, child: Text("提交"),),
+        }, child: Text("提交", style: TextStyle(color: Colors.blue),),),
       ),
       body: MyScrollView(
         child: Container(

@@ -11,11 +11,11 @@ ThunkAction<IndexState> getPersonRepair(context, {@required params, next}){
       Map map = store.state.repair.person;
       var data = await NetHttp.request("/api/app/property/repair/userReapir", context, params: params);
       
-      if(map == null || params["current"]==1){
+      if(map == null || params["current"]==1){ 
         store.dispatch( PersonRepairAction(data) );
       }else{
-        map["list"].addAll(data["list"]);
-        store.dispatch(PersonRepairAction(map));
+        data["list"].insertAll(0,map["list"]);
+        store.dispatch(PersonRepairAction(data));
       }
       
     }catch(e){
@@ -33,8 +33,8 @@ ThunkAction<IndexState> getToRepair(context, {@required params, next, bool}){
       if(map == null || params["current"]==1){
         store.dispatch( ToRepairAction(data) );
       }else{
-        map["list"].addAll(data["list"]);
-        store.dispatch(ToRepairAction(map));
+        data["list"].insertAll(0,map["list"]);
+        store.dispatch(ToRepairAction(data));
       }
       
     }catch(e){

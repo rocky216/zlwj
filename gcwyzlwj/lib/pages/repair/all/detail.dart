@@ -71,6 +71,10 @@ class _RepairDetailPageState extends State<RepairDetailPage> {
     if(data != null){
       showToast("操作成功！");
       Navigator.of(context).pop();
+      StoreProvider.of<IndexState>(context).dispatch( getToRepair(context, params: {
+        "current": 1,
+        "type": widget.arguments["type"]
+      }));
     }
   }
 
@@ -108,10 +112,7 @@ class _RepairDetailPageState extends State<RepairDetailPage> {
       body: MyScrollView(
         child: StoreConnector<IndexState, Map>(
           onDispose: (Store store){
-            store.dispatch( getToRepair(context, params: {
-              "current": 1,
-              "type": widget.arguments["type"]
-            }));
+            
             
           },
           converter: (store)=>store.state.app.news,
