@@ -17,7 +17,6 @@ class _PersonRepairPageState extends State<PersonRepairPage> {
   initial(current, {type="userProcessing"}) async {
     StoreProvider.of<IndexState>(context).dispatch( getPersonRepair(context, params: {
       "current": current,
-      "pageSize": "7",
       "type": widget.type
     }) );
   }

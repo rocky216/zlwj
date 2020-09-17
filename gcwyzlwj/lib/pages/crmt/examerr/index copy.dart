@@ -57,7 +57,6 @@ class _CrmtExamerrState extends State<CrmtExamerr> {
 
   initial(date){
     StoreProvider.of<IndexState>(context).dispatch( getExamerrOrder(context, params: {
-      "pageSize": "10",
       "current": 1,
     }) );
   }

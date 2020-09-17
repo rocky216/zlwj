@@ -52,7 +52,6 @@ class _CrmtListState extends State<CrmtList> {
 
   initial(date){
     StoreProvider.of<IndexState>(context).dispatch( getFeeOrder(context, params: {
-      "pageSize": 10,
       "current": 1,
       "time": "$date 23:59:59"
     }) );

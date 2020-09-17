@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyHeader(
+        goback: false,
         title: currentHe!=null?Text(currentHe["name"]):Container(),
         leading: Builder(builder: (BuildContext context){
           return Container(

@@ -51,7 +51,6 @@ class _CrmtExpendState extends State<CrmtExpend> {
 
   initial(date){
     StoreProvider.of<IndexState>(context).dispatch( getExpendOrder(context, params: {
-      "pageSize": 10,
       "current": "1",
       "time": "$date 23:59:59"
     }) );

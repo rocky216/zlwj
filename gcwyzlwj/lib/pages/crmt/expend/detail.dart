@@ -74,7 +74,7 @@ class _CrmtExpendDetailState extends State<CrmtExpendDetail> {
               ),
               detail["reviewer"] == null?Container()
               :MyCard(
-                title: Text("异常信息", style: TextStyle(fontWeight: FontWeight.w600),),
+                title: Text("审核信息", style: TextStyle(fontWeight: FontWeight.w600),),
                 child: Column(
                   children: <Widget>[
                     MyCard(
@@ -85,6 +85,11 @@ class _CrmtExpendDetailState extends State<CrmtExpendDetail> {
                   ],
                 )
               ),
+              Column(
+                children: (detail["enclosures"] as List).map((f){
+                  return Image.network(f, fit: BoxFit.cover,);
+                }).toList(),
+              )
             ],
           ),
         ),

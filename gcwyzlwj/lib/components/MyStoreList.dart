@@ -47,6 +47,7 @@ class _MyStoreListState extends State<MyStoreList> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
        child: RefreshIndicator( 
           onRefresh: () async {
@@ -57,10 +58,8 @@ class _MyStoreListState extends State<MyStoreList> {
             controller: _controller,
               itemBuilder: (BuildContext context, int index){
                 if(index == widget.data["list"].length+(widget.first != null?1:0)){
-                  if(widget.data["total"] == widget.data["list"].length){
-                    return Container();
-                  }
-                  return MyPullLoad(dataList: widget.data["list"], bBtn: this.bBtn);
+                  
+                  return MyPullLoad(dataList: widget.data["list"], bBtn: widget.data["total"] == widget.data["list"].length);
                 }
                 
                 if(widget.first != null && index==0){

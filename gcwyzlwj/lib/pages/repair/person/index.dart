@@ -32,7 +32,6 @@ class _PersonRepairState extends State<PersonRepair> with TickerProviderStateMix
     this.type=type;
     StoreProvider.of<IndexState>(context).dispatch( getPersonRepair(context, params: {
       "current": current,
-      "pageSize": "7",
       "type": type
     }) );
   }

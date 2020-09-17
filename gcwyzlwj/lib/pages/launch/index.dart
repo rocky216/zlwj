@@ -95,7 +95,11 @@ class _LaunchPageState extends State<LaunchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: new Center(
-        child: Text("正在加载数据。。。")
+        child: Container(
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height,
+          child: Image.asset("assets/images/launch_image.png", fit: BoxFit.cover,),
+        )
       ),
     );
   }

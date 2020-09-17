@@ -20,7 +20,6 @@ class _DailyInspectState extends State<DailyInspect> {
     StoreProvider.of<IndexState>(context).dispatch( getInspects(context, params: {
       "current": current,
       "time": "$date 23:59:59",
-      "pageSize": "10"
     }) );
   }
 

@@ -32,7 +32,7 @@ ThunkAction<IndexState> getNews(context, {@required params, next}){
       var map = store.state.app.news;
       var data = await NetHttp.request("/api/app/property/ManagMessage/selectManagMessage", context, params:params);
       
-      if(map == null || params["current"]==1){
+      if(map == null || params["current"]==1 || params["current"]=="1"){
         store.dispatch( NewsListAction(data) );
       }else{
         map["list"].addAll(data["list"]);

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gcwyzlwj/components/MyHeader.dart';
-import 'package:gcwyzlwj/components/MyInput.dart';
 import 'package:gcwyzlwj/components/MyScrollView.dart';
 import 'package:gcwyzlwj/redux/export.dart';
 import 'package:gcwyzlwj/utils/index.dart';
@@ -17,6 +16,7 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyHeader(
+        goback: false,
         title: Container(
           margin: EdgeInsets.only(left: 10.0),
           child: Text("个人中心"),
@@ -24,6 +24,7 @@ class _UserPageState extends State<UserPage> {
         actions: MaterialButton(
           onPressed: (){
             popconfirm(context, title: Text("是否退出登录？", style: TextStyle(fontSize: 16.0),), next: () async {
+              StoreProvider.of<IndexState>(context).dispatch( ClearIndexAction() );
               await removeUserInfo();
               Navigator.of(context).pushNamedAndRemoveUntil("/login", (route)=>false);
             });

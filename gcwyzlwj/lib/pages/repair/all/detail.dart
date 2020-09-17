@@ -282,7 +282,7 @@ class _RepairDetailPageState extends State<RepairDetailPage> {
                               }).toList(),
                             ),
                           ),
-                          widget.arguments["processingState"]=="2"?Container()
+                          widget.arguments["processingState"]=="2" || widget.arguments["isAcceptance"]==0?Container()
                           :MyInput(label: Text(""), 
                               child: Container(
                                 margin: EdgeInsets.only(top: 10.0, bottom: 10.0),

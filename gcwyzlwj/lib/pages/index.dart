@@ -24,6 +24,10 @@ class _IndexPageState extends State<IndexPage> {
   void initState() { 
     super.initState();
     this.tipsAgreement();
+    this.getRid();
+  }
+  getRid(){
+    initPlatformState(context);
   }
 
   tipsAgreement() async {

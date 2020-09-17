@@ -40,5 +40,5 @@ CrmtState crmtReducer(CrmtState state, action){
   //   return CrmtState(examincome:action.examincome, examexpend:state.examexpend, examerr: state.examerr, income: state.income, expend: state.expend, fee: state.fee);
   // }
   
-  return state;
+  return CrmtState();
 }
