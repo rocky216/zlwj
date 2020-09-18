@@ -44,6 +44,10 @@ class _LaunchPageState extends State<LaunchPage> {
                 if (await canLaunch( data["appResourceUrl"] )) {
                   await launch(data["appResourceUrl"]);
                 }
+              }else if(Platform.isIOS){
+                if (await canLaunch( appStore )) {
+                  await launch(appStore);
+                }
               }
               
             }, 

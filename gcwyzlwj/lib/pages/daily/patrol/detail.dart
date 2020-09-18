@@ -75,10 +75,9 @@ class _PatrolDetailState extends State<PatrolDetail> {
       body: MyScrollView(
         child: StoreConnector<IndexState, DailyState>(
           onDispose: (Store store){
-            DateTime d = new DateTime.now();
-            String date = d.toString().substring(0,10);
+            
             store.dispatch( getMyPatrol(context, params: {
-              "buildTime": "$date 23:59:59"
+              "buildTime": "${widget.arguments['date']} 23:59:59"
             }) );
           },
           converter: (store)=>store.state.daily,
