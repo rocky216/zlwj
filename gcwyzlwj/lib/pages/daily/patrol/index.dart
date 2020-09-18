@@ -81,7 +81,7 @@ class _DailyPatrolState extends State<DailyPatrol> {
             if(d != null){
               String date = d.toString().substring(0,10);
               setState(() {
-                date=date;
+                this.date=date;
               });
               myPatrol(date);
             }
@@ -121,6 +121,7 @@ class _DailyPatrolState extends State<DailyPatrol> {
                               child: MaterialButton(
                                 color: Colors.blue,
                                 onPressed: (){
+                                  f["date"]=this.date;
                                   Navigator.of(context).pushNamed("/daily/patroldetail", arguments: f);
                                 }, 
                                 child: Text("开始巡更", style: TextStyle(color: Colors.white, fontSize: 12),),
@@ -161,7 +162,7 @@ class _DailyPatrolState extends State<DailyPatrol> {
                               child: MaterialButton(
                                 color: f["recordStatus"]=="0"?Color(0XFFf79844):Colors.blue,
                                 onPressed: (){
-                                  f["date"]=date;
+                                  f["date"]=this.date;
                                   Navigator.of(context).pushNamed("/daily/patrolrecord/detail", arguments: f);
                                 }, 
                                 child: Text(f["recordStatus"]=="0"?"继续巡更":"查看详情", style: TextStyle(color: Colors.white, fontSize: 12),),
