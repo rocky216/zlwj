@@ -73,7 +73,7 @@ class _DailyClockState extends State<DailyClock> {
     
     if(data != null && (_loc != null || wifiName != null)){
       
-      if(_loc != null && 
+      if(_loc != null && _loc.latitude!=null && _loc.longitude != null &&
         _getDistance(double.parse(data["lat"]), double.parse(data["lng"]), _loc.latitude, _loc.longitude)<=data["scope"]){
 
         return true;
@@ -260,25 +260,30 @@ class _DailyClockState extends State<DailyClock> {
   }
 
   getLocation() async {
-    Map<Permission, PermissionStatus> statuses = await [
-      Permission.location,
-      Permission.storage,
-    ].request();
-    //请求信息
-    this.initial();
-    await AMapLocationClient.startup(new AMapLocationOption( 
-      desiredAccuracy:CLLocationAccuracy.kCLLocationAccuracyHundredMeters  ));
-      var loc = await AMapLocationClient.getLocation(true);
-      setState(() {
-        _loc = loc;
+      try{
+        Map<Permission, PermissionStatus> statuses = await [
+        Permission.location,
+        Permission.storage,
+      ].request();
+      //请求信息
+      this.initial();
+      await AMapLocationClient.startup(new AMapLocationOption( 
+        desiredAccuracy:CLLocationAccuracy.kCLLocationAccuracyHundredMeters  ));
+        var loc = await AMapLocationClient.getLocation(true);
+        setState(() {
+          _loc = loc;
+        });
+      AMapLocationClient.onLocationUpate.listen((AMapLocation loc){
+        if(!mounted)return;
+        setState(() {
+          _loc = loc;
+        });
       });
-    // AMapLocationClient.onLocationUpate.listen((AMapLocation loc){
-    //   if(!mounted)return;
-    //   setState(() {
-    //     _loc = loc;
-    //   });
-    // });
-    // AMapLocationClient.startLocation();
+      AMapLocationClient.startLocation();
+    }catch(e){
+      print(e);
+    }
+    
   }
 
   _getDistance(double lat1, double lng1, double lat2, double lng2) {
@@ -292,6 +297,6 @@ class _DailyClockState extends State<DailyClock> {
   }
 
   double _rad(double d) {
-    return d * pi / 180.0;
+    return (d * pi) / 180.0;
   }
 }

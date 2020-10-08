@@ -72,30 +72,31 @@ class _SetClockPageState extends State<SetClockPage> {
   }
 
   getLocation() async {
-    Map<Permission, PermissionStatus> statuses = await [
-      Permission.location,
-      Permission.storage,
-    ].request();
-    if(Platform.isIOS){
-      print(1212);
-      await AMapLocationClient.setApiKey(amapKey);
+    try{
+        Map<Permission, PermissionStatus> statuses = await [
+        Permission.location,
+        Permission.storage,
+      ].request();
+      if(Platform.isIOS){
+        await AMapLocationClient.setApiKey(amapKey);
+      }
+      await AMapLocationClient.startup(new AMapLocationOption( 
+        desiredAccuracy:CLLocationAccuracy.kCLLocationAccuracyHundredMeters  ));
+        var loc = await AMapLocationClient.getLocation(true);
+        
+        setState(() {
+          _loc = loc;
+        });
+      AMapLocationClient.onLocationUpate.listen((AMapLocation loc){
+        if(!mounted)return;
+        setState(() {
+          _loc = loc;
+        });
+      });
+      AMapLocationClient.startLocation();
+    }catch(e){
+      print(e);
     }
-    await AMapLocationClient.startup(new AMapLocationOption( 
-      desiredAccuracy:CLLocationAccuracy.kCLLocationAccuracyHundredMeters  ));
-      var loc = await AMapLocationClient.getLocation(true);
-      
-      setState(() {
-        _loc = loc;
-      });
-    AMapLocationClient.onLocationUpate.listen((AMapLocation loc){
-      print(11111);
-      if(!mounted)return;
-      print(11111);
-      setState(() {
-        _loc = loc;
-      });
-    });
-    AMapLocationClient.startLocation();
   }
 
   submit() async {
