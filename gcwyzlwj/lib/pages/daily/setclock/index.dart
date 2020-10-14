@@ -158,6 +158,10 @@ class _SetClockPageState extends State<SetClockPage> {
                     )
                   ],
                 ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 20.0),
+                child: Text("ps：若无法获取定位请顶部下拉打开定位功能！", style: TextStyle(color: Colors.red),),
               )
             ],
           ),

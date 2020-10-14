@@ -32,7 +32,7 @@ dependencies:
   # amap_location_plugin: ^0.2.0
   animator: ^2.0.1
   permission_handler: ^5.0.1+1 
-  connectivity: ^0.4.9+2
+  connectivity: ^0.4.8+1
   shared_preferences: ^0.5.10
   fluttertoast: ^4.0.1
   flutter_easyloading: ^1.1.4
