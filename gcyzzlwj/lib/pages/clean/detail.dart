@@ -43,6 +43,7 @@ class _CleanDetailPageState extends State<CleanDetailPage> {
       body: MyScrollView(
         child: this.detail==null? Container()
         :Container(
+          padding: EdgeInsets.only(left: 10.0, right: 10.0),
           child: Column(
             children: <Widget>[
               Text(detail["repairName"], style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20.0),),
@@ -55,13 +56,27 @@ class _CleanDetailPageState extends State<CleanDetailPage> {
               ),
               Container(
                 padding: EdgeInsets.all(10.0),
-                child: Column(
-                  children: imgs.map((f){
-                    print(f);
-                    return Padding(padding: EdgeInsets.fromLTRB(0, 10.0, 0, 0),
+                child: Wrap(
+                  children: (this.detail["imgSubUrls"] as List).map((f){
+                    return Container(
+                      margin: EdgeInsets.only(right: 5.0, bottom: 5.0),
                       child: MyBigImg(
                         imgUrl: f, 
-                        child: Image.network(f, fit: BoxFit.fill,)
+                        child: Image.network(f, fit: BoxFit.fill, width: 100.0, height: 150.0,)
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(10.0),
+                child: Wrap(
+                  children: (this.detail["imgEndUrls"] as List).map((f){
+                    return Container(
+                      margin: EdgeInsets.only(right: 5.0, bottom: 5.0),
+                      child: MyBigImg(
+                        imgUrl: f, 
+                        child: Image.network(f, fit: BoxFit.fill, width: 100.0, height: 150.0,)
                       ),
                     );
                   }).toList(),

@@ -17,3 +17,7 @@ class UsersAction {
   Map users;
   UsersAction(this.users);
 }
+
+class ClearAction {
+  
+}

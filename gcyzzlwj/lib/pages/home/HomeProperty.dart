@@ -11,9 +11,9 @@ class HomeProperty extends StatelessWidget {
   ];
   List affair2List = [
     {"name": "政务公开", "icon": const Icon(IconData(0xe621,fontFamily: 'AntdIcons'), size: 16.0, color: Colors.white), "bgcolor": 0xFFc602f0, "link": "/govern"},
-    {"name": "巡查记录", "icon": const Icon(IconData(0xe607,fontFamily: 'AntdIcons'), size: 16.0, color: Colors.white), "bgcolor": 0xFFff09902, "link": "/notice"},
-    {"name": "通行记录", "icon": const Icon(IconData(0xe622,fontFamily: 'AntdIcons'), size: 16.0, color: Colors.white), "bgcolor": 0xFF6c02f0, "link": "/notice"},
-    {"name": "报修记录", "icon": const Icon(IconData(0xe763,fontFamily: 'AntdIcons'), size: 16.0, color: Colors.white), "bgcolor": 0xFFf06102, "link": "/notice"},
+    {"name": "巡查记录", "icon": const Icon(IconData(0xe607,fontFamily: 'AntdIcons'), size: 16.0, color: Colors.white), "bgcolor": 0xFFff09902, "link": "/inspect"},
+    {"name": "通行记录", "icon": const Icon(IconData(0xe622,fontFamily: 'AntdIcons'), size: 16.0, color: Colors.white), "bgcolor": 0xFF6c02f0, "link": "/pass/record"},
+    {"name": "报修记录", "icon": const Icon(IconData(0xe763,fontFamily: 'AntdIcons'), size: 16.0, color: Colors.white), "bgcolor": 0xFFf06102, "link": "/repair/record"},
   ];
 
  

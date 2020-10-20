@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gcyzzlwj/components/MyCard.dart';
 import 'package:gcyzzlwj/components/MyHeader.dart';
+import 'package:gcyzzlwj/components/MySimpleList.dart';
 import 'package:gcyzzlwj/utils/http.dart';
+import 'package:gcyzzlwj/utils/index.dart';
 
 class ControlPage extends StatefulWidget {
   ControlPage({Key key}) : super(key: key);
@@ -18,6 +20,7 @@ class _ControlPageState extends State<ControlPage> {
   void initState() { 
     super.initState();
     this.initial();
+    
   }
   initial() async {
     var data = await NetHttp.request("/api/app/owner/qr/deviceDoorList", context, params: {});
@@ -33,6 +36,7 @@ class _ControlPageState extends State<ControlPage> {
     setState(() {
       this.doorlist=doorlist;
     });
+    item["timer"]?.cancel();
     item["timer"] = Timer.periodic(Duration(seconds: 1), (t){
       item["times"]--;
       if(item["times"]==0){
@@ -50,11 +54,11 @@ class _ControlPageState extends State<ControlPage> {
       "openSecond":item["openSecond"].toString(),
       "reader":item["port"].toString(),
     };
-    // var data = await NetHttp.request("/controller/remote/open", context,method: "post", params: params);
+    var data = await NetHttp.request("/controller/remote/open", context,method: "post", params: params);
     
-    // if(data != null){
-    //   showToast("开门成功");
-    // }
+    if(data != null){
+      showToast("开门成功");
+    }
   }
 
   
@@ -68,35 +72,29 @@ class _ControlPageState extends State<ControlPage> {
       body: Container(
         padding: EdgeInsets.all(10.0),
         child: ListView.separated(
-          itemBuilder: (context, index){
-            return Container(
-              child: MyCard(
-                title: Text(this.doorlist[index]["doorName"], style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),),
-                child: Container(
-                  padding: EdgeInsets.all(10.0),
-                  alignment: Alignment.center,
-                  child: Container(
-                    height: 90.0,
-                    width: 90.0,
-                    child: RaisedButton(
-                      color: this.doorlist[index]["times"]==null?Theme.of(context).primaryColor: Colors.grey,
-                      child: Text(this.doorlist[index]["times"]==null?"开门":doorlist[index]["times"].toString()+'s', style: TextStyle(color: Colors.white, fontSize: 16.0),),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(50.0))
-                      ),
-                      onPressed: (){
-                        if(this.doorlist[index]["times"]==null){
-                          this.openDoor(this.doorlist[index]);
-                        }
-                      },
-                    ),
+          itemBuilder: (context, i){
+            return ListTile(
+              title: Text(this.doorlist[i]["doorName"]),
+              trailing: Container(
+                width: 50.0,
+                child: MaterialButton(
+                  padding: EdgeInsets.zero,
+                  color: this.doorlist[i]["times"]==null?Theme.of(context).primaryColor: Colors.grey,
+                  child: this.doorlist[i]["times"]==null?Icon(Icons.lock_open, color: Colors.white, size: 20.0,):Text(this.doorlist[i]["times"].toString()+'s'),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(50.0))
                   ),
+                  onPressed: (){
+                    if(this.doorlist[i]["times"]==null){
+                      this.openDoor(this.doorlist[i]);
+                    }
+                  },
                 ),
               ),
             );
           }, 
           separatorBuilder: (context, int index){
-            return Container(height: 10.0);
+            return Container(height: 5.0, color: Color(0xFFeeeeee),);
           }, 
           itemCount: this.doorlist.length,
         )

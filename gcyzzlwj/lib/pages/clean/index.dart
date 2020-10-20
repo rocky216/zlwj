@@ -15,7 +15,7 @@ class _CleanPageState extends State<CleanPage> {
 
   initial(current){
     StoreProvider.of<IndexState>(context).dispatch(getCleanList(context, params: {
-      "current": current
+      "current": current,
     }));
   }
 
@@ -57,7 +57,6 @@ class _CleanPageState extends State<CleanPage> {
         },
         converter: (Store store)=>store.state.other.clean,
         builder: (context, state){
-          
           return state==null? Container()
           :MyStoreList(
             data: state, 
@@ -78,8 +77,8 @@ class _CleanPageState extends State<CleanPage> {
                         decoration: BoxDecoration(
                           color: Color(0xFFeeeeee) 
                         ),
-                        child: dataList[i]["cover"]==null? Icon(Icons.image, size: 30.0, color: Colors.grey,)
-                          :Image.network(dataList[i]["cover"], height: 80.0, width: 80.0, fit: BoxFit.fill),
+                        child: dataList[i]["img"]==""|| dataList[i]["img"].isEmpty  ? Icon(Icons.image, size: 30.0, color: Colors.grey,)
+                          :Image.network(dataList[i]["img"], height: 80.0, width: 80.0, fit: BoxFit.fill),
                       ),
                     ),
                     

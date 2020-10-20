@@ -16,5 +16,8 @@ AppState appReducer(AppState state, action){
   if(action is UsersAction){
     return AppState(users: action.users, home: state.home, helist: state.helist, userale: state.userale);
   }
+  if( action is ClearAction ){
+    return AppState();
+  }
   return state;
 }

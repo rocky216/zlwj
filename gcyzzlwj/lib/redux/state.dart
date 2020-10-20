@@ -6,7 +6,7 @@ class IndexState {
   AppState app;
   OtherState other;
 
-  IndexState(this.app, this.other);
+  IndexState(this.app, this.other); 
 
   factory IndexState.initial(){
     return IndexState(

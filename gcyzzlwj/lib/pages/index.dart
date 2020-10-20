@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gcyzzlwj/components/MyScan.dart';
 import 'package:gcyzzlwj/pages/home/index.dart';
 import 'package:gcyzzlwj/pages/users/index.dart';
@@ -12,8 +13,20 @@ class IndexPage extends StatefulWidget {
 }
 
 class _IndexPageState extends State<IndexPage> {
+  DateTime lastPopTime;
   int _currentIndex=0;
   List pTab = [ HomePage(), UsersPage()];
+
+  @override
+  void initState() { 
+    super.initState();
+    this.getRid();
+  }
+
+  getRid(){
+    initPlatformState(context);
+  }
+
 
   activeColor(int key){
     return this._currentIndex==key?Theme.of(context).primaryColor:Colors.grey;
@@ -21,7 +34,8 @@ class _IndexPageState extends State<IndexPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      child: Scaffold(
       body: pTab[_currentIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Container(
@@ -76,7 +90,7 @@ class _IndexPageState extends State<IndexPage> {
               child: FlatButton(
                 child: Column(
                   children: <Widget>[
-                    Icon(Icons.person, color: this.activeColor(2)),
+                    Icon(Icons.person, color: this.activeColor(1)),
                     Text("我的", style: TextStyle(fontSize: 12.0, color: this.activeColor(2)))
                   ],
                 ),
@@ -90,6 +104,20 @@ class _IndexPageState extends State<IndexPage> {
           ],
         ),
       ),
+    ), 
+    
+    onWillPop: () async {
+      print(lastPopTime);
+      print(11111);
+      if(lastPopTime == null || DateTime.now().difference(lastPopTime) > Duration(seconds: 2)){
+          lastPopTime = DateTime.now();
+          showToast("再按一次退出");
+        }else{
+          lastPopTime = DateTime.now();
+          // 退出app
+          await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+        }
+      },
     );
   }
 }

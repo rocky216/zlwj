@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gcyzzlwj/components/MyHeader.dart';
 import 'package:gcyzzlwj/components/MyList.dart';
+import 'package:gcyzzlwj/components/MyScan.dart';
 
 class PlatePage extends StatefulWidget {
   PlatePage({Key key}) : super(key: key);
@@ -16,20 +17,29 @@ class _PlatePageState extends State<PlatePage> {
       appBar: MyHeader(
         title: "车牌识别",
       ),
-      body: MyList(
-        url: "/api/app/owner/user/license",
-        itemBuilder: (dataList, index){
-          return ListTile(
-            title: Text(dataList[index]["licensePlate"]),
-            subtitle: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("手机号:"+dataList[index]["linkPhone"]),
-                Text("联系人:"+dataList[index]["linkName"]),
-              ],
+      body: Container(
+        margin: EdgeInsets.only(top: 50.0),
+        width: double.infinity,
+        child: Column(
+          children: [
+            MyScan(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                  boxShadow: [
+                    BoxShadow(color: Colors.grey, blurRadius: 3.0)
+                  ]
+                ),
+                child: CircleAvatar(
+                  radius: 35.0,
+                  child: Icon(Icons.crop_free, size: 30.0, color: Colors.white,),
+                ),
+              ),
             ),
-          );
-        },
+            SizedBox(height: 20.0,),
+            Text("停车扫码支付")
+          ],
+        ),
       ),
     );
   }

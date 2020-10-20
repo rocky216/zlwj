@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_drag_scale:
-    git: https://github.com/LiuC520/flutter_drag_scale.git 
+    git: https://github.com/LiuC520/flutter_drag_scale.git
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -36,9 +36,9 @@ dependencies:
   dio: ^3.0.10
   fluttertoast: ^4.0.1
   shared_preferences: ^0.5.12
+  redux: ^4.0.0+3
   flutter_redux: ^0.6.0
   redux_thunk: ^0.3.0
-  redux: ^4.0.0+3
   barcode_scan: ^3.0.1
   fluwx: ^2.2.0
   flutter_html: ^1.0.2
@@ -47,6 +47,8 @@ dependencies:
   smart_select: ^4.3.2
   image_picker: ^0.6.7+11
   flutter_native_image: ^0.0.5+2
+  jpush_flutter: 0.5.5
+  flutter_guidance_plugin: ^0.0.3
 
 dev_dependencies:
   flutter_test:

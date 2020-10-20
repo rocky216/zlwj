@@ -19,7 +19,8 @@ class _HallPageState extends State<HallPage> {
         url: "/api/app/owner/theme/blobs/",
         itemBuilder: (dataList, index){
           List imgs = dataList[index]["contentUrl"];
-          return GestureDetector(
+          return MaterialButton(
+            padding: EdgeInsets.zero,
             child: Container(
               padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
               child: Column(
@@ -45,7 +46,7 @@ class _HallPageState extends State<HallPage> {
                 ],
               ),
             ),
-            onTap: (){
+            onPressed: (){
               Navigator.of(context).pushNamed("/hall/detial", arguments: dataList[index]);
             },
           );

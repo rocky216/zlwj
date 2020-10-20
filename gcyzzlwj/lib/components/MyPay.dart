@@ -6,7 +6,9 @@ import 'package:gcyzzlwj/utils/index.dart';
 class MyPay extends StatefulWidget {
   final Widget child;
   final Map<String, dynamic> params;
-  MyPay({Key key, @required this.child, @required this.params}) : super(key: key);
+  final Function next;
+  final bool disabled;
+  MyPay({Key key, @required this.child, @required this.params, this.next, this.disabled=false}) : super(key: key);
 
   @override
   _MyPayState createState() => _MyPayState();
@@ -46,8 +48,10 @@ class _MyPayState extends State<MyPay> {
   paywx() async {
     try{
       var data = await NetHttp.request("/api/app/owner/order/power/unifiedOrder", context, params: widget.params);
-
     if(data != null){
+      if(widget.next!=null){
+        widget.next();
+      }
       try{
         var d = await fluwx.payWithWeChat(
           appId: data["appid"].toString(),         //APPID
@@ -75,6 +79,9 @@ class _MyPayState extends State<MyPay> {
     return Container(
        child: GestureDetector(
          onTap: (){
+           if(widget.disabled){
+             return;
+           }
            if(widget.params["payment"] == null || widget.params["payment"].toString() == "0" ){
              showToast("请选择金额");
              return;

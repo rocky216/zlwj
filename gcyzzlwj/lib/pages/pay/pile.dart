@@ -1,10 +1,16 @@
+import 'dart:async';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:gcyzzlwj/components/MyCard.dart';
 import 'package:gcyzzlwj/components/MyHeader.dart';
 import 'package:gcyzzlwj/components/MyPay.dart';
 import 'package:gcyzzlwj/components/MyRadio.dart';
 import 'package:gcyzzlwj/components/MyScrollView.dart';
+import 'package:gcyzzlwj/config/index.dart';
 import 'package:gcyzzlwj/utils/http.dart';
+import 'package:gcyzzlwj/utils/index.dart';
 
 class PayPilePage extends StatefulWidget {
   final arguments;
@@ -20,6 +26,8 @@ class _PayPilePageState extends State<PayPilePage> {
   Map info;
   int portIndex=0;
   int timeIndex = 0;
+  Timer timer;
+  bool btn = true;
 
   @override
   void initState() { 
@@ -27,17 +35,76 @@ class _PayPilePageState extends State<PayPilePage> {
     initial();
   }
 
+  @override
+  dispose(){
+    super.dispose();
+    timer?.cancel();
+  }
+
   initial() async {
     var data = await NetHttp.request("/api/app/owner/power/selectPowerPortList", context, params: {
       "url": widget.arguments["content"],
     });
-    print(data);
     if(data != null){
       setState(() {
         this.info = data;
         this.portIndex = data["selectPort"];
       });
+    }else{
+      Navigator.of(context).pop();
     }
+  }
+
+  noWechatPay() async {
+    var data = await NetHttp.request("/api/app/owner/order/loosePay", context, params: {
+      "payment": this.info["rates"][this.timeIndex]["money"],
+      "deviceId": this.info["portList"][this.portIndex]["powerId"],
+      "port": this.info["portList"][this.portIndex]["port"].toString(),
+      "payType": this.paymode==2?"balance":this.paymode==3?"score":""
+    });
+    if(data != null){
+      this.trackIsStart();
+    }
+  }
+
+  trackIsStart() {
+    setState(() {
+      this.btn = false;
+    });
+    timer = Timer(Duration(seconds: 3), () async {
+      var data = await NetHttp.request("/api/app/owner/power/trackPowerOrder", context, params: {
+        "deviceId": this.info["portList"][this.portIndex]["powerId"].toString(),
+        "port": this.info["portList"][this.portIndex]["port"].toString(),
+      });
+      if(data != null){
+        Navigator.of(context).pushNamed("/pile/order");
+      }
+    });
+    
+
+    // Dio dio = new Dio();
+    // dio.options
+    //     ..baseUrl = baseUrl
+    //     ..connectTimeout = 100000
+    //     ..receiveTimeout = 5000
+    //     ..validateStatus = (int status){
+    //       return status>0;
+    //     };
+    // final userInfo = await getUserInfo();
+  
+    // var token = userInfo!= null?userInfo["token"]:null;
+
+    // Response response = await dio.request("/api/app/owner/power/trackPowerOrder", 
+    //   queryParameters: {
+    //     "token": token,
+    //     "deviceId": this.info["portList"][this.portIndex]["powerId"].toString(),
+    //     "port": this.info["portList"][this.portIndex]["port"].toString(),
+    //   },
+    // );
+    // print(response.data);
+    // print(11111);
+
+    
   }
 
   @override
@@ -168,6 +235,10 @@ class _PayPilePageState extends State<PayPilePage> {
             SizedBox(height: 10.0,),
             this.paymode==1?
             MyPay(
+              disabled: !this.btn,
+              next: (){
+                this.trackIsStart();
+              },
               params: {
                 "payment": info["rates"][this.timeIndex]["money"],
                 "deviceId": info["portList"][this.portIndex]["powerId"].toString(),
@@ -177,7 +248,7 @@ class _PayPilePageState extends State<PayPilePage> {
               child: Container(
                 margin: EdgeInsets.only(bottom: 20.0),
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: this.btn? Colors.blue : Colors.grey,
                 ),
                 padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                 child:Text("支付并创建充电订单", style: TextStyle(color: Colors.white),),
@@ -185,12 +256,15 @@ class _PayPilePageState extends State<PayPilePage> {
             )
             : GestureDetector(
               onTap: (){
+                if(this.btn){
+                  this.noWechatPay();
+                }
                 
               },
               child: Container(
                 margin: EdgeInsets.only(bottom: 20.0),
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: this.btn? Colors.blue : Colors.grey,
                 ),
                 padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                 child:Text("支付并创建充电订单", style: TextStyle(color: Colors.white),),

@@ -80,7 +80,7 @@ class _MyListState extends State<MyList> {
         separatorBuilder: (context, index){
           return Container(height: 1.0, color: Color(0xFFeeeeee));
         }, 
-        itemCount: this.info["list"].length,
+        itemCount: this.info["list"].length+1,
         controller: _scrollController,
       ),
     );

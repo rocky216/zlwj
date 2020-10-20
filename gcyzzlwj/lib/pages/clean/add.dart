@@ -68,9 +68,9 @@ class _AddCleanPageState extends State<AddCleanPage> {
       "repairTypeId": this.repairTypeId,
       "repairName": this.repairName,
       "repairInfo": this.repairInfo,
-      "imgUrls": this.imgUrls.join(),
+      "imgUrls": this.imgUrls.join(","),
     });
-    print(data);
+    
     if(data != null){
       Navigator.of(context).pop();
       showToast("提交成功!");

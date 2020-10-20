@@ -12,7 +12,7 @@ class MyPullLoad extends StatelessWidget {
     if(list.isEmpty){
       return MyEmpty();
     }
-    if(list.length>=10 && list.length >= this.data["total"]){
+    if(list.length>=15 && list.length >= this.data["total"]){
       return Container(
         padding: EdgeInsets.all(8.0),
         child: Text("已经到底了~",textAlign: TextAlign.center, style: TextStyle(color: Color(0xFF999999)),),

@@ -9,6 +9,7 @@ import 'package:gcyzzlwj/routers/index.dart';
 
 void main() {
   runApp(MyApp());
+  // configLoading();
   SystemUiOverlayStyle _style =
           SystemUiOverlayStyle(
             statusBarColor: Colors.transparent
@@ -16,23 +17,28 @@ void main() {
       SystemChrome.setSystemUIOverlayStyle(_style);
 }
 
+void configLoading() {
+  EasyLoading.instance
+    ..userInteractions = false;
+}
+
 class MyApp extends StatelessWidget { 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '智联万家',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return StoreProvider(
+      store: createStore(),
+      child: MaterialApp(
+        title: '智联万家',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: LaunchPage(),
+        builder: (BuildContext context, Widget child){
+          return FlutterEasyLoading(child: child,);
+        },
+        onGenerateRoute: onGenerateRoute
       ),
-      home: LaunchPage(),
-      builder: (BuildContext context, Widget child){
-        return StoreProvider(
-          store: createStore(),
-          child: FlutterEasyLoading(child: child,),
-        );
-      },
-      onGenerateRoute: onGenerateRoute
     );
   }
 }

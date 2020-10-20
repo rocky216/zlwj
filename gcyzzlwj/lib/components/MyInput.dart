@@ -16,13 +16,14 @@ class MyInput extends StatefulWidget {
   final EdgeInsets padding;
   final controller;
   final String hintText;
-  MyInput({this.controller, Key key, @required this.label, this.maxLines=1, this.onChange, this.enabled=true, this.child, this.padding, this.hintText=""}) : super(key: key);
+  MyInput({Key key, this.controller, @required this.label, this.maxLines=1, this.onChange, this.enabled=true, this.child, this.padding, this.hintText=""}) : super(key: key);
 
   @override
   _MyInputState createState() => _MyInputState();
 }
 
 class _MyInputState extends State<MyInput> {
+
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -40,7 +40,6 @@ class NetHttp {
         queryParameters: params,
         options: options
       );
-
       if(response.data is String){
         response.data = convert.jsonDecode(response.data);
       }

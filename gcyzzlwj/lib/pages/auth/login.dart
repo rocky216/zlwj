@@ -1,6 +1,6 @@
 
 import 'dart:async';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gcyzzlwj/components/MyHeader.dart';
@@ -26,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   int time=60;
   int totalTime = 60;
   var timer=null;
+  String rid;
 
 
   countDowm(){
@@ -59,7 +60,15 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() { 
     super.initState();
-    
+    this.getRid();
+  }
+
+  getRid(){
+    initPlatformState(context, next: (rid){
+      setState(() {
+        this.rid=rid;
+      });
+    });
   }
 
   goLogin() async {
@@ -67,12 +76,16 @@ class _LoginPageState extends State<LoginPage> {
     if(!this.isMessage){
       data = await NetHttp.request("/api/app/owner/user/login/password", context, method: "post", params: {
         "account": this._username,
-        "password": this._password
+        "password": this._password,
+        "registrationId": this.rid,
+        "registrationType": Platform.isIOS?"ios":"android"
       });
     }else {
       data = await NetHttp.request("/api/app/owner/user/login/code", context, method: "post", params: {
         "account": this._username,
-        "code": this._code
+        "code": this._code,
+        "registrationId": this.rid,
+        "registrationType": Platform.isIOS?"ios":"android"
       });
     }
 
