@@ -8,7 +8,7 @@ class MyEmpty extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       height: 100,
-      child: Icon(IconData(0xe696, fontFamily: 'AntdIcons'), color: Colors.grey, size: 40,),
+      child: const Icon(IconData(0xe696, fontFamily: 'AntdIcons'), color: Colors.grey, size: 40,),
     );
   }
 }

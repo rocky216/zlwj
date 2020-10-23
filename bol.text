@@ -1,0 +1,12 @@
+1、fluwx
+ext.kotlin_version = '1.3.72'
+
+
+2、redux
+  StoreProvider 一定要写在mian.dart的最外层，否则有坑
+
+  3、The number of method references in a .dex file cannot exceed 64K.
+    https://www.cnblogs.com/inthecloud/p/12124136.html
+  
+4、设置mac文件权限
+  sudo chmod -R 777 *

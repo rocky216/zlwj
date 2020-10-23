@@ -29,6 +29,7 @@ class _DailyClockState extends State<DailyClock> {
   Timer timer;
   bool btn1 = true;
   bool btn2 = true;
+  bool isLoc = true;
   
 
   @override
@@ -36,12 +37,16 @@ class _DailyClockState extends State<DailyClock> {
     super.initState();
     this.getHe();
     this.getLocation();
+    
+    this.initial();
     _connectivitySubscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      
       this.getWifi();
     });
     
     
   }
+
 
   getHe() async {
     Map userInfo = await getUserInfo();
@@ -71,13 +76,14 @@ class _DailyClockState extends State<DailyClock> {
 
   bool setColor(){
     
-    if(data != null && (_loc != null || wifiName != null)){
-      
-      if(_loc != null && 
+    if(this.data != null && (this._loc != null || this.wifiName != null)){
+
+      if(_loc != null && _loc.latitude!=null && _loc.longitude != null &&
         _getDistance(double.parse(data["lat"]), double.parse(data["lng"]), _loc.latitude, _loc.longitude)<=data["scope"]){
 
         return true;
-      }else if(wifiName != null && data["wifi"] == wifiName){
+      }else if(this.wifiName != null && data["wifi"] == this.wifiName){
+        
         return true;
       }
       return false;
@@ -235,6 +241,10 @@ class _DailyClockState extends State<DailyClock> {
                     )
                   ],
                 ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 20.0),
+                child: Text("ps：若无法打卡请顶部下拉打开定位功能！", style: TextStyle(color: Colors.red),),
               )
             ],
           ),
@@ -247,9 +257,11 @@ class _DailyClockState extends State<DailyClock> {
    var connectivityResult = await Connectivity().checkConnectivity();
    
    if(connectivityResult == ConnectivityResult.wifi){
+     
+     var wifiName = await (Connectivity().getWifiName());
      var wifiBSSID = await (Connectivity().getWifiBSSID());
      var wifiIP = await (Connectivity().getWifiIP());
-     var wifiName = await (Connectivity().getWifiName());
+     print(wifiName);
      setState(() {
        this.wifiBSSID = wifiBSSID;
        this.wifiIP = wifiIP;
@@ -260,25 +272,31 @@ class _DailyClockState extends State<DailyClock> {
   }
 
   getLocation() async {
-    Map<Permission, PermissionStatus> statuses = await [
-      Permission.location,
-      Permission.storage,
-    ].request();
-    //请求信息
-    this.initial();
-    await AMapLocationClient.startup(new AMapLocationOption( 
-      desiredAccuracy:CLLocationAccuracy.kCLLocationAccuracyHundredMeters  ));
-      var loc = await AMapLocationClient.getLocation(true);
-      setState(() {
-        _loc = loc;
+      try{
+        Map<Permission, PermissionStatus> statuses = await [
+        Permission.location,
+        Permission.storage,
+      ].request();
+      //请求信息
+      bool isLoc = await Permission.locationWhenInUse.serviceStatus.isEnabled;
+      
+      await AMapLocationClient.startup(new AMapLocationOption( 
+        desiredAccuracy:CLLocationAccuracy.kCLLocationAccuracyHundredMeters  ));
+        var loc = await AMapLocationClient.getLocation(true);
+        setState(() {
+          _loc = loc;
+        });
+      AMapLocationClient.onLocationUpate.listen((AMapLocation loc){
+        if(!mounted)return;
+        setState(() {
+          _loc = loc;
+        });
       });
-    // AMapLocationClient.onLocationUpate.listen((AMapLocation loc){
-    //   if(!mounted)return;
-    //   setState(() {
-    //     _loc = loc;
-    //   });
-    // });
-    // AMapLocationClient.startLocation();
+      AMapLocationClient.startLocation();
+    }catch(e){
+      print(e);
+    }
+    
   }
 
   _getDistance(double lat1, double lng1, double lat2, double lng2) {
@@ -292,6 +310,6 @@ class _DailyClockState extends State<DailyClock> {
   }
 
   double _rad(double d) {
-    return d * pi / 180.0;
+    return (d * pi) / 180.0;
   }
 }

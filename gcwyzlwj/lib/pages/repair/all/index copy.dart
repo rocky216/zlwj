@@ -17,7 +17,6 @@ class _AllRepairState extends State<AllRepair> with TickerProviderStateMixin{
     _controller = new TabController(length: 3, vsync: this);
     _controller.addListener((){
       if(_controller.index == 1 && _controller.indexIsChanging){
-        print(1212);
       }
     });
   }

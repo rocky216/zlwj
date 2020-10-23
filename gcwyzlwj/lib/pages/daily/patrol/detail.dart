@@ -136,7 +136,7 @@ class _PatrolDetailState extends State<PatrolDetail> {
                                 child: index==0 && !status?MyScan(
                                   child: Column(
                                     children: <Widget>[
-                                      Icon(IconData(0xe606, fontFamily: "AntdIcons"), size: 30, color: Colors.blue,),
+                                      const Icon(IconData(0xe606, fontFamily: "AntdIcons"), size: 30, color: Colors.blue,),
                                       Text("扫一扫", style: TextStyle(color: Colors.blue),)
                                     ],
                                   ),

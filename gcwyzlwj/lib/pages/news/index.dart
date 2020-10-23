@@ -62,10 +62,14 @@ class _NewsPageState extends State<NewsPage> {
                     }
                     
                   },
-                  trailing: Container(
+                  trailing: dataList[index]["isRead"]==0
+                  ?Container(
                     width: 20.0,
-                    child: Icon(IconData(0xe6ee, fontFamily: "AntdIcons"), size: 20.0, 
-                      color: dataList[index]["isRead"]==0?Colors.orange:Colors.blue,),
+                    child: const Icon(IconData(0xe6ee, fontFamily: "AntdIcons"), size: 20.0, color: Colors.orange,),
+                  )
+                  :Container(
+                    width: 20.0,
+                    child: const Icon(IconData(0xe6ee, fontFamily: "AntdIcons"), size: 20.0, color: Colors.blue,),
                   ),
                   title: Text(dataList[index]["msgTitle"], overflow: TextOverflow.ellipsis, maxLines: 1,),
                   subtitle: Column(

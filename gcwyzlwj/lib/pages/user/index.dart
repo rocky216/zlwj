@@ -96,7 +96,7 @@ class _UserPageState extends State<UserPage> {
                           onTap: (){
                             Navigator.of(context).pushNamed("/agreement");
                           },
-                          leading: Icon(IconData(0xe67e, fontFamily: 'AntdIcons'), color: Color(0xFF777777), size: 20.0,),
+                          leading: const Icon(IconData(0xe67e, fontFamily: 'AntdIcons'), color: Color(0xFF777777), size: 20.0,),
                           title: Text("用户隐私协议", style: TextStyle(fontSize: 14.0),),
                           trailing: Icon(Icons.chevron_right),
                         )
