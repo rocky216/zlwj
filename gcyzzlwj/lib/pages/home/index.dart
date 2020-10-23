@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:gcyzzlwj/components/MyHeader.dart';
 import 'package:gcyzzlwj/components/MyScrollView.dart';
+import 'package:gcyzzlwj/pages/home/HomeClean.dart';
 import 'package:gcyzzlwj/pages/home/HomeDrawer.dart';
 import 'package:gcyzzlwj/pages/home/HomeProperty.dart';
 import 'package:gcyzzlwj/pages/home/HomeSwiper.dart';
 import 'package:gcyzzlwj/redux/export.dart';
+import 'package:gcyzzlwj/utils/http.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -21,10 +23,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage>  {
+  
 
-
-
-List serviceList = [
+  List serviceList = [
     {"name": "访客", "img": "assets/images/visitor.png", "link": "/visitor"},
     {"name": "门禁", "img": "assets/images/control.png", "link": "/control"},
     {"name": "充电桩", "img": "assets/images/pile.png", "link": "/pile"},
@@ -36,7 +37,6 @@ List serviceList = [
   @override
   void initState() { 
     super.initState();
-    
   }
 
   
@@ -45,7 +45,7 @@ List serviceList = [
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: StoreConnector<IndexState, Map>(
+        child: StoreConnector<IndexState, IndexState>(
           onInit: (Store store){
             if(store.state.app.home == null){
               store.dispatch( getHomeInfo(context));
@@ -54,12 +54,13 @@ List serviceList = [
               store.dispatch( getUsers(context) );
             }
             
+            
           },
-          converter: (store)=>store.state.app.home,
+          converter: (store)=>store.state,
           builder: (BuildContext context, state){
-            return state==null?Container()
+            return state.app.home==null ?Container()
             : Scaffold(
-              appBar: MyHeader(theme: "blue", title: state["heName"],
+              appBar: MyHeader(theme: "blue", title: state.app.home["heName"],
               leading: Builder(
                 builder: (context){
                   return FlatButton(
@@ -70,34 +71,56 @@ List serviceList = [
                   );
                 },
               ),),
-              body: MyScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      color: Colors.blue,
-                      padding: EdgeInsets.only(bottom: 5.0),
-                      child: HomeSwiper(banners: state["banner"],),
-                    ),
-                    HomeProperty(),
-                    Container(
-                      margin: EdgeInsets.only(top: 10.0),
-                      child: Wrap(
-                        children: serviceList.asMap().keys.map((f) => 
+              body: RefreshIndicator(
+                onRefresh: () async {
+                  StoreProvider.of<IndexState>(context).dispatch( getHomeInfo(context) );
+                  return null;
+                },
+                child: ListView.separated(
+                  itemBuilder: (context, i){
+                    if(i==0){
+                      return Column(
+                        children: [
                           Container(
-                          padding: EdgeInsets.fromLTRB(f%2==1?5.0:10.0, 5.0, f%2==1?10.0:5.0, 5.0),
-                          width: MediaQuery.of(context).size.width/2,
-                          child: GestureDetector(
-                              child: Image(image: AssetImage(serviceList[f]["img"]), fit: BoxFit.fitHeight),
-                              onTap: (){
-                                Navigator.of(context).pushNamed(serviceList[f]["link"]);
-                              }),
-                        ),
-                        ).toList(),
-                      ),
-                    )
-                  ],
-                ),
+                            width: double.infinity,
+                            color: Colors.blue,
+                            padding: EdgeInsets.only(bottom: 5.0),
+                            child: HomeSwiper(banners: state.app.home["banner"],),
+                          ),
+                          HomeProperty(),
+                          Container(
+                            margin: EdgeInsets.only(top: 10.0),
+                            child: Wrap(
+                              children: serviceList.asMap().keys.map((f) => 
+                                Container(
+                                padding: EdgeInsets.fromLTRB(f%2==1?5.0:10.0, 5.0, f%2==1?10.0:5.0, 5.0),
+                                width: MediaQuery.of(context).size.width/2,
+                                child: GestureDetector(
+                                    child: Image(image: AssetImage(serviceList[f]["img"]), fit: BoxFit.fitHeight),
+                                    onTap: (){
+                                      Navigator.of(context).pushNamed(serviceList[f]["link"]);
+                                    }),
+                              ),
+                              ).toList(),
+                            ),
+                          )
+                        ],
+                      );
+                    }else{
+                      return HomeClean(dataList: state.app.home["repair"], i: i-1);
+                    }
+                  }, 
+                  separatorBuilder: (context, i){
+                    if(i==0){
+                      return Container(
+                        padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0),
+                        child: Text("报修记录"),
+                      );
+                    }else {
+                      return Container(height: 2.0, color: Color(0xFFdddddd),);
+                    }
+                  }, 
+                  itemCount: state.app.home["repair"].length+1),
               ),
               drawer: Container(
                 width: 200.0,

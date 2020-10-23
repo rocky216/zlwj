@@ -53,8 +53,8 @@ class _RepairRecordPageState extends State<RepairRecordPage> {
                     decoration: BoxDecoration(
                       color: Color(0xFFeeeeee) 
                     ),
-                    child: dataList[i]["cover"]==null? Icon(Icons.image, size: 30.0, color: Colors.grey,)
-                      :Image.network(dataList[i]["cover"], height: 80.0, width: 80.0, fit: BoxFit.fill),
+                    child: dataList[i]["img"]==""|| dataList[i]["img"].isEmpty  ? Icon(Icons.image, size: 30.0, color: Colors.grey,)
+                      :Image.network(dataList[i]["img"], height: 80.0, width: 80.0, fit: BoxFit.fill),
                   ),
                 ),
                 

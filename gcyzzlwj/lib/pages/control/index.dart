@@ -1,9 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:gcyzzlwj/components/MyCard.dart';
 import 'package:gcyzzlwj/components/MyHeader.dart';
-import 'package:gcyzzlwj/components/MySimpleList.dart';
 import 'package:gcyzzlwj/utils/http.dart';
 import 'package:gcyzzlwj/utils/index.dart';
 
@@ -47,14 +44,12 @@ class _ControlPageState extends State<ControlPage> {
         this.doorlist=doorlist;
       });
     });
-    
-    
-    Map params = {
+
+    var data = await NetHttp.request("/controller/remote/open", context,method: "post", params: {
       "iotId":item["iotId"],
       "openSecond":item["openSecond"].toString(),
       "reader":item["port"].toString(),
-    };
-    var data = await NetHttp.request("/controller/remote/open", context,method: "post", params: params);
+    });
     
     if(data != null){
       showToast("开门成功");

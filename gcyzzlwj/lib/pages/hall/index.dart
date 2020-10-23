@@ -20,7 +20,7 @@ class _HallPageState extends State<HallPage> {
         itemBuilder: (dataList, index){
           List imgs = dataList[index]["contentUrl"];
           return MaterialButton(
-            padding: EdgeInsets.zero,
+            padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
             child: Container(
               padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
               child: Column(
@@ -37,10 +37,10 @@ class _HallPageState extends State<HallPage> {
                       )
                     )).toList(),
                   ),
-                  Text(dataList[index]["themeEndText"], maxLines: 2, overflow: TextOverflow.ellipsis, ),
+                  Text(dataList[index]["themeEndText"], maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: Color(0xFF666666)), ),
                   Container(
                     margin: EdgeInsets.only(top: 5.0),
-                    child: Text(dataList[index]["buildTime"], textAlign: TextAlign.right,
+                    child: Text('发布时间：'+dataList[index]["buildTime"], textAlign: TextAlign.right,
                           style: TextStyle(color: Color(0xFF666666)),),
                   )
                 ],

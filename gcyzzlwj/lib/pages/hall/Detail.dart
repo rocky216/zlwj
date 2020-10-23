@@ -84,6 +84,9 @@ class _DisHallDetailPageState extends State<DisHallDetailPage> {
   }
   getHousesInfo(){
     var house = this.houselist.where((item)=>item["isSelect"]==true).toList();
+    if(house.isEmpty){
+      return {};
+    }
     return {
       "buildId": house[0]["buildingId"].toString(),
       "unitId": house[0]["unitId"].toString(),
@@ -93,11 +96,13 @@ class _DisHallDetailPageState extends State<DisHallDetailPage> {
 
   handlenSubmit() async {
     String optionIds = this.getOptionsIds();
+    
     Map houses = this.getHousesInfo();
-    if(optionIds=="" ){
+    if(optionIds=="" || houses.isEmpty ){
       showToast("请选择投票选项和房间！");
       return;
     }
+    
     houses["optionIds"] = optionIds;
     houses["themeId"] = widget.arguments["id"].toString();
     

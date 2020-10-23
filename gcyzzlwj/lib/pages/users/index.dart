@@ -24,16 +24,16 @@ class _UsersPageState extends State<UsersPage> {
 
   List behaviorList = [
     {"title": "缴费记录","link":"/user/payment", "icon": const Icon(IconData(0xe625,fontFamily: 'AntdIcons'), size: 22.0, color: Colors.black54,), "show": 0},
-    {"title": "投票记录","link":"/", "icon": const Icon(IconData(0xe61f,fontFamily: 'AntdIcons'), size: 22.0, color: Colors.black54,)},
+    {"title": "投票记录","link":"/hall/record", "icon": const Icon(IconData(0xe61f,fontFamily: 'AntdIcons'), size: 22.0, color: Colors.black54,)},
     {"title": "充电订单","link":"/pile/order", "icon": const Icon(IconData(0xe62c,fontFamily: 'AntdIcons'), size: 22.0, color: Colors.black54,)},
-    {"title": "停车订单","link":"/", "icon": const Icon(IconData(0xe64b,fontFamily: 'AntdIcons'), size: 24.0, color: Colors.black54,)},
+    {"title": "停车订单","link":"/plate/order", "icon": const Icon(IconData(0xe64b,fontFamily: 'AntdIcons'), size: 24.0, color: Colors.black54,)},
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyHeader(
-        title: "个人中心",
+        title: "  个人中心",
         actions: FlatButton(
           onPressed: () {
             confirmDialog(context, title: Text("是否退出登录？"), ok: (){
@@ -48,9 +48,7 @@ class _UsersPageState extends State<UsersPage> {
       body: MyScrollView(
         child: StoreConnector<IndexState, AppState>(
           onInit: (store){
-            if(store.state.app.userale==null){
-              store.dispatch( getUserRela(context) );
-            }
+            store.dispatch( getUserRela(context) );
           },
           converter: (store)=>store.state.app,
           builder: (context, state){

@@ -40,7 +40,7 @@ ThunkAction<IndexState> getDrawerInfo(context, {params, next}){
 ThunkAction<IndexState> getUserRela(context, {params, next}){
   return (Store<IndexState> store) async {
     try{
-      var data = await NetHttp.request("/api/app/owner/my/myInfo", context, params: {});
+      var data = await NetHttp.request("/api/app/owner/my/myInfo", context, params: {}, isloading: false);
       
       if(data != null){
         store.dispatch( UserRaleAction(data) );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gcyzzlwj/components/MyAgreement.dart';
 import 'package:gcyzzlwj/components/MyScan.dart';
 import 'package:gcyzzlwj/pages/home/index.dart';
 import 'package:gcyzzlwj/pages/users/index.dart';
@@ -21,6 +22,7 @@ class _IndexPageState extends State<IndexPage> {
   void initState() { 
     super.initState();
     this.getRid();
+    this.tipsAgreement();
   }
 
   getRid(){
@@ -30,6 +32,20 @@ class _IndexPageState extends State<IndexPage> {
 
   activeColor(int key){
     return this._currentIndex==key?Theme.of(context).primaryColor:Colors.grey;
+  }
+
+  tipsAgreement() async {
+    var agree = await getAgreement();
+    if(agree==null){
+      confirmDialog(context, title: Text("用户协议"), content: Container(
+        child: MyAgreement(),
+      ), onCancel: () async {
+        await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+      }, ok: () async {
+        await setAgreement();
+        Navigator.of(context).pushNamedAndRemoveUntil("/index", (route)=>false);
+      });
+    }
   }
 
   @override
@@ -86,12 +102,12 @@ class _IndexPageState extends State<IndexPage> {
               child: Text("扫一扫", style: TextStyle(color: Colors.grey, fontSize: 12.0),),
             ),
             Container(
-              height: 40.0,
+              height: 45.0,
               child: FlatButton(
                 child: Column(
                   children: <Widget>[
                     Icon(Icons.person, color: this.activeColor(1)),
-                    Text("我的", style: TextStyle(fontSize: 12.0, color: this.activeColor(2)))
+                    Text("我的", style: TextStyle(fontSize: 12.0, color: this.activeColor(1)))
                   ],
                 ),
                 onPressed: (){
@@ -107,8 +123,6 @@ class _IndexPageState extends State<IndexPage> {
     ), 
     
     onWillPop: () async {
-      print(lastPopTime);
-      print(11111);
       if(lastPopTime == null || DateTime.now().difference(lastPopTime) > Duration(seconds: 2)){
           lastPopTime = DateTime.now();
           showToast("再按一次退出");

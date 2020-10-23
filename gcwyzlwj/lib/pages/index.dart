@@ -31,18 +31,18 @@ class _IndexPageState extends State<IndexPage> {
   }
 
   tipsAgreement() async {
-      var agree = await getAgreement();
-      if(agree==null){
-        popconfirm(context, title: Text("用户协议"), content: Container(
-          child: MyAgreement(),
-        ), onCancel: () async {
-          await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-        }, next: () async {
-          await setAgreement();
-          Navigator.of(context).pushNamedAndRemoveUntil("/index", (route)=>false);
-        });
-      }
+    var agree = await getAgreement();
+    if(agree==null){
+      popconfirm(context, title: Text("用户协议"), content: Container(
+        child: MyAgreement(),
+      ), onCancel: () async {
+        await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+      }, next: () async {
+        await setAgreement();
+        Navigator.of(context).pushNamedAndRemoveUntil("/index", (route)=>false);
+      });
     }
+  }
   
 
   @override
