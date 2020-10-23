@@ -26,6 +26,7 @@ class NetHttp {
     String method="get",
     @required Map<String, dynamic> params,
     contentType,
+    bool isloading=true
   }) async {
     /* 配置网络配置 */
     
@@ -34,7 +35,10 @@ class NetHttp {
   
     params["token"] = userInfo!= null?userInfo["token"]:null;
     try{
-      EasyLoading.show();
+      if(isloading){
+        EasyLoading.show();
+      }
+      
       Response response = await instance().request(
         baseUrl+url, 
         queryParameters: params,
@@ -53,10 +57,15 @@ class NetHttp {
       }else if( response.data["code"] == 1 && response.data["data"] == null){
         response.data["data"] = {};
       }
-      EasyLoading.dismiss();
+      if(isloading){
+        EasyLoading.dismiss();
+      }
+      
       return response.data["data"];
     } on DioError catch(e){
-      EasyLoading.dismiss();
+      if(isloading){
+        EasyLoading.dismiss();
+      }
       return Future.error(e);
     }
 

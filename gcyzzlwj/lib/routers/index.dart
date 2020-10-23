@@ -1,7 +1,10 @@
 
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gcyzzlwj/components/MyShowImage.dart';
+import 'package:gcyzzlwj/pages/auth/Register.dart';
+import 'package:gcyzzlwj/pages/auth/agreement.dart';
 import 'package:gcyzzlwj/pages/auth/login.dart';
 import 'package:gcyzzlwj/pages/call/index.dart';
 import 'package:gcyzzlwj/pages/card/edit.dart';
@@ -24,13 +27,16 @@ import 'package:gcyzzlwj/pages/launch/index.dart';
 import 'package:gcyzzlwj/pages/notice/detail.dart';
 import 'package:gcyzzlwj/pages/notice/index.dart';
 import 'package:gcyzzlwj/pages/pay/pile.dart';
+import 'package:gcyzzlwj/pages/pay/plate.dart';
 import 'package:gcyzzlwj/pages/payment/detail.dart';
 import 'package:gcyzzlwj/pages/payment/index.dart';
 import 'package:gcyzzlwj/pages/pile/index.dart';
 import 'package:gcyzzlwj/pages/pile/orders.dart';
 import 'package:gcyzzlwj/pages/plate/index.dart';
+import 'package:gcyzzlwj/pages/plate/orders.dart';
 import 'package:gcyzzlwj/pages/plate/userplate.dart';
 import 'package:gcyzzlwj/pages/record/bill.dart';
+import 'package:gcyzzlwj/pages/record/hall.dart';
 import 'package:gcyzzlwj/pages/record/pass.dart';
 import 'package:gcyzzlwj/pages/record/repair.dart';
 import 'package:gcyzzlwj/pages/users/editusers.dart';
@@ -50,6 +56,7 @@ var routes = {
   "/clean/detail": (context, arguments)=>CleanDetailPage(arguments: arguments,),
   "/call": (context)=>CallPage(),
   "/paypile": (context, arguments)=>PayPilePage(arguments:arguments),
+  "/payplate": (context, argument) => PayPlatePage(arguments: argument),
   "/govern": (context) => GovernPage(),
   "/govern/detail": (context, arguments)=>GovernDetailPage(arguments: arguments,),
   "/visitor": (context)=>VisitorPage(),
@@ -60,6 +67,7 @@ var routes = {
   "/pile": (context)=>PilePage(),
   "/pile/order": (context)=>PileOrderListPage(),
   "/plate": (context)=>PlatePage(),
+  "/plate/order": (context)=>PlateOrdersPage(),
   "/showimg": (context, arguments)=>MyShowImage(arguments: arguments,),
   "/inspect": (context)=>InspectPage(),
   "/inspect/detail": (context, arguments)=>InspectDetailPage(arguments:arguments),
@@ -72,7 +80,10 @@ var routes = {
   "/user/payment": (context)=>UserPayment(),
   "/user/payment/detail": (context, arguments)=>UserPaymentDetail(arguments:arguments),
   "/bill/record": (context)=>BillRecordPage(),
-  "/editusers": (context)=>EditUsersPage()
+  "/editusers": (context)=>EditUsersPage(),
+  "/hall/record": (context)=>HallRecordPage(),
+  "/agreement": (context)=>UserAgreement(),
+  "/register": (context)=>RegisterPage()
 };
 
 var onGenerateRoute =  (RouteSettings settings){

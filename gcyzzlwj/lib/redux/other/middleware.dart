@@ -6,7 +6,7 @@ ThunkAction<IndexState> getCleanList(context, {params, next}){
   return (Store<IndexState> store) async {
     try{
       var map = store.state.other.clean; 
-      var data = await NetHttp.request("/api/app/owner/myJournal/heRepair", context, params: params);
+      var data = await NetHttp.request("/api/app/owner/myJournal/heRepair", context, params: params, isloading: false);
       
       if(map == null || params["current"]==1 || params["current"]=="1" ){
         store.dispatch(CleanAction(data));

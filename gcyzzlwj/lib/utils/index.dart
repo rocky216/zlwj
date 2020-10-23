@@ -24,7 +24,27 @@ Future<void> initPlatformState(context, {Function next}) async {
         
       }, onOpenNotification: (Map<String, dynamic> message) async {
         print("打开通知: $message");
-        Navigator.of(context).pushNamedAndRemoveUntil("/index", (route)=>false);
+        try{
+          Map map = convert.jsonDecode(message["extras"]["cn.jpush.android.EXTRA"]);
+          String type = map["type"];
+
+          switch(type){
+            case "cdz":
+              Navigator.of(context).pushNamed("/pile/order");
+              break;
+            case "cdz":
+              Navigator.of(context).pushNamed("/plate/order");
+              break;
+            case "yst":
+              Navigator.of(context).pushNamed("/hall");
+              break;
+          }
+
+        }catch(e){
+          print(e);
+        }
+        
+        
         
       }, onReceiveMessage: (Map<String, dynamic> message) async {
         print("接收消息: $message");
@@ -70,7 +90,7 @@ Future<void> initPlatformState(context, {Function next}) async {
 
   }
 
-confirmDialog(context, {Widget title, Widget content, Function ok}){
+confirmDialog(context, {Widget title, Widget content, Function ok, Function onCancel}){
   return showDialog(
     context: context,
     builder: (context) {
@@ -81,7 +101,9 @@ confirmDialog(context, {Widget title, Widget content, Function ok}){
           FlatButton(
             onPressed: () {
               Navigator.of(context).pop();
-              
+              if(onCancel != null){
+                onCancel();
+              }
             },
             child: Text('取消'),
           ),
@@ -176,8 +198,15 @@ scanJump(context, String result){
   List arr = str.split("=");
   print(arr);
   switch( arr[0] ){
-    case "cdz":
+    case "cdz": //充电桩
       Navigator.of(context).pushNamed("/paypile", arguments: {
+        "type": arr[0],
+        "code": arr[1],
+        "content": result
+      });
+      break;
+    case "iotId": //车牌
+      Navigator.of(context).pushNamed("/payplate", arguments: {
         "type": arr[0],
         "code": arr[1],
         "content": result
