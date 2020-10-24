@@ -59,7 +59,12 @@ class _InspectDetailPageState extends State<InspectDetailPage> {
               ),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
+              padding: EdgeInsets.all(10.0),
+              width: double.infinity,
+              child: Text(detail["checkInfo"]),
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
               width: double.infinity,
               child: Wrap(
                 children: (detail["attrList"] as List).map((f) => 

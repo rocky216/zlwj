@@ -194,24 +194,30 @@ int getIndexOf(List arr, attr, str){
 
 /* 扫码解析跳转 */
 scanJump(context, String result){
-  String str = result.split("?")[1];
-  List arr = str.split("=");
-  print(arr);
-  switch( arr[0] ){
-    case "cdz": //充电桩
-      Navigator.of(context).pushNamed("/paypile", arguments: {
-        "type": arr[0],
-        "code": arr[1],
-        "content": result
-      });
-      break;
-    case "iotId": //车牌
-      Navigator.of(context).pushNamed("/payplate", arguments: {
-        "type": arr[0],
-        "code": arr[1],
-        "content": result
-      });
-      break;
+  try{
+
+    String str = result.split("?")[1];
+    List arr = str.split("=");
+    
+    switch( arr[0] ){
+      case "cdz": //充电桩
+        Navigator.of(context).pushNamed("/paypile", arguments: {
+          "type": arr[0],
+          "code": arr[1],
+          "content": result
+        });
+        break;
+      case "iotId": //车牌
+        Navigator.of(context).pushNamed("/payplate", arguments: {
+          "type": arr[0],
+          "code": arr[1],
+          "content": result
+        });
+        break;
+    }
+
+  }catch(e){
+    print(e);
   }
 }
 

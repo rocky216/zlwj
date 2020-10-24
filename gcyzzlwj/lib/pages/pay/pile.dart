@@ -39,6 +39,7 @@ class _PayPilePageState extends State<PayPilePage> {
   dispose(){
     super.dispose();
     timer?.cancel();
+    EasyLoading.dismiss();
   }
 
   initial() async {

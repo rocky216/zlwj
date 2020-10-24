@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluwx/fluwx.dart' as fluwx;
+import 'package:gcyzzlwj/config/index.dart';
 import 'package:gcyzzlwj/utils/http.dart';
 import 'package:gcyzzlwj/utils/index.dart';
 
@@ -39,8 +40,8 @@ class _MyPayState extends State<MyPay> {
         appId: "wx7e527bffc978694d",
         // doOnAndroid: true,
         doOnIOS: false,
-          // universalLink: "https://your.univerallink.com/link/"
-        );
+        universalLink: universalLink,
+      );
     var result = await fluwx.isWeChatInstalled;
     // print("微信注册成功-- $result");
   }

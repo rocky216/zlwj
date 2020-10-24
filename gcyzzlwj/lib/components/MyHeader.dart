@@ -29,12 +29,12 @@ class _MyHeaderState extends State<MyHeader> {
       top: false,
       child: Container(
         decoration: BoxDecoration(
-          color: widget.theme=="blue" ? Colors.blue:Colors.white,
+          color: widget.theme=="blue" ? Colors.blue:Color(0xFFfafafa),
         ),
         
         child: AppBar(
           title: Text(widget.title??"", style: TextStyle( color: widget.theme=="blue"?Colors.white: Colors.black , fontSize: 16.0),),
-          backgroundColor:  widget.theme=="blue"?Colors.blue : Colors.white,
+          backgroundColor:  widget.theme=="blue"?Colors.blue : Color(0xFFfafafa),
           brightness: widget.theme=="blue"? Brightness.dark : Brightness.light,
           elevation: 0,
           titleSpacing: 0.0,

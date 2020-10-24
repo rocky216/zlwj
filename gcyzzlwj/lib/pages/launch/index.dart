@@ -34,7 +34,7 @@ class _LaunchPageState extends State<LaunchPage> {
   appVersion() async {
     var data = await NetHttp.request("/api/app/owner/common/app/version", context, params: {});
     if(data != null){
-      if(data["versionNo"] != version){
+      if( Platform.isAndroid && data["versionNo"] != version){
         confirmDialog(
           context, 
           title:Text("发现新版本，请及时更新？"),
