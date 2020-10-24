@@ -9,6 +9,7 @@ import 'package:gcyzzlwj/routers/index.dart';
 
 void main() {
   runApp(MyApp());
+  print(1212121);
   // configLoading();
   SystemUiOverlayStyle _style =
           SystemUiOverlayStyle(

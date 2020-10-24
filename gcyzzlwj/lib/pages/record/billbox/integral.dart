@@ -17,6 +17,7 @@ class _IntegralBillRecordState extends State<IntegralBillRecord> with AutomaticK
         "type": "integral"
       },
       itemBuilder: (dataList, i){
+        print(dataList[i]["updateScore"]);
         return ListTile(
           title: Text(dataList[i]["logTypeStr"]),
           subtitle: Column(
@@ -26,8 +27,8 @@ class _IntegralBillRecordState extends State<IntegralBillRecord> with AutomaticK
               Text('订单号：'+dataList[i]["linkNo"]),
             ],
           ),
-          trailing: Text(dataList[i]["updateBalance"]=="in"?"+ ":"- " + dataList[i]["updateScore"].toString(),
-            style: TextStyle(color: dataList[i]["updateBalance"]=="in"?Colors.green:Colors.red, fontSize: 20.0),),
+          trailing:  Text("${dataList[i]["scoreType"]=="in"?"+ ":"- "}${dataList[i]["updateScore"].toString()}" ,
+            style: TextStyle(color: dataList[i]["scoreType"]=="in"?Colors.green:Colors.red, fontSize: 20.0),),
         );
       }
     );

@@ -17,7 +17,7 @@ class _BalanceBillRecordState extends State<BalanceBillRecord>  with AutomaticKe
         "type": "balance"
       },
       itemBuilder: (dataList, i){
-        print(dataList[i]["updateBalance"]);
+        
         return ListTile(
           title: Text(dataList[i]["logTypeStr"]),
           subtitle: Column(
@@ -26,7 +26,7 @@ class _BalanceBillRecordState extends State<BalanceBillRecord>  with AutomaticKe
               Text('创建时间：'+dataList[i]["buildTime"]),
               Text('订单号：'+dataList[i]["linkNo"]),
             ],
-          ),
+          ), 
           trailing: Text((dataList[i]["balanceType"]=="in"?"+ ":"- ") + dataList[i]["updateBalance"].toString(),
             style: TextStyle(color: dataList[i]["balanceType"]=="in"?Colors.green:Colors.red, fontSize: 20.0),),
         );

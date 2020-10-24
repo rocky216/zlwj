@@ -33,12 +33,14 @@ class _PayPilePageState extends State<PayPilePage> {
   void initState() { 
     super.initState();
     initial();
+    print("object");
   }
 
   @override
   dispose(){
     super.dispose();
     timer?.cancel();
+    EasyLoading.dismiss();
   }
 
   initial() async {
@@ -80,29 +82,6 @@ class _PayPilePageState extends State<PayPilePage> {
         Navigator.of(context).pushNamed("/pile/order");
       }
     });
-    
-
-    // Dio dio = new Dio();
-    // dio.options
-    //     ..baseUrl = baseUrl
-    //     ..connectTimeout = 100000
-    //     ..receiveTimeout = 5000
-    //     ..validateStatus = (int status){
-    //       return status>0;
-    //     };
-    // final userInfo = await getUserInfo();
-  
-    // var token = userInfo!= null?userInfo["token"]:null;
-
-    // Response response = await dio.request("/api/app/owner/power/trackPowerOrder", 
-    //   queryParameters: {
-    //     "token": token,
-    //     "deviceId": this.info["portList"][this.portIndex]["powerId"].toString(),
-    //     "port": this.info["portList"][this.portIndex]["port"].toString(),
-    //   },
-    // );
-    // print(response.data);
-    // print(11111);
 
     
   }

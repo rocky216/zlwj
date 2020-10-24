@@ -4,6 +4,7 @@ import 'package:gcyzzlwj/components/MyScan.dart';
 import 'package:gcyzzlwj/components/MyScrollView.dart';
 import 'package:gcyzzlwj/utils/http.dart';
 import 'package:gcyzzlwj/utils/index.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PilePage extends StatefulWidget {
   PilePage({Key key}) : super(key: key);
@@ -98,12 +99,28 @@ class _PilePageState extends State<PilePage> {
                 ),
               ),
             ),
+            Container(
+              margin: EdgeInsets.only(top: 10.0),
+              child: ListTile(
+                leading: Icon(Icons.phone, color: Colors.red,),
+                title: Text("咨询热线：${detail["phone"]}", style: TextStyle(color: Colors.red, fontSize: 18.0),),
+                onTap: () async {
+                  var url = "tel:${detail["phone"]}";
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  } else {
+                    throw 'Could not launch $url';
+                  }
+                },
+              ),
+            ),
+
             MyScan(
               next: (result){
                 scanJump(context, result);
               },
               child: Container(
-                margin: EdgeInsets.only(top: 10.0),
+                margin: EdgeInsets.only(top: 10.0, bottom: 20.0),
                 padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
                 decoration: BoxDecoration(
                   color: Colors.blue,

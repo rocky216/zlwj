@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluwx/fluwx.dart' as fluwx;
+import 'package:gcyzzlwj/config/index.dart';
 import 'package:gcyzzlwj/utils/http.dart';
 import 'package:gcyzzlwj/utils/index.dart';
 
@@ -20,7 +21,6 @@ class _MyPayState extends State<MyPay> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
     this._initFluwx();
     fluwx.weChatResponseEventHandler.listen((res) {
       // print(res.errStr);
@@ -37,20 +37,24 @@ class _MyPayState extends State<MyPay> {
     await fluwx.registerWxApi(
       /* 支付APPID */
         appId: "wx7e527bffc978694d",
-        // doOnAndroid: true,
-        doOnIOS: false,
-        );
+        doOnAndroid: true,
+        doOnIOS: true,
+        universalLink: universalLink,
+      );
     var result = await fluwx.isWeChatInstalled;
-    // print("微信注册成功-- $result");
+  
+    print("微信注册成功-- $result");
   }
 
   paywx() async {
     try{
       var data = await NetHttp.request("/api/app/owner/order/power/unifiedOrder", context, params: widget.params);
+      
     if(data != null){
       if(widget.next!=null){
         widget.next();
       }
+      
       try{
         var d = await fluwx.payWithWeChat(
           appId: data["appid"].toString(),         //APPID

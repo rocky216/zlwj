@@ -27,7 +27,6 @@ class _CallPageState extends State<CallPage> {
             title: Text(dataList[i]["name"]),
             onTap: () async {
               var url = "tel:${dataList[i]['info']}";
-              print(url);
               if (await canLaunch(url)) {
                 await launch(url);
               } else {

@@ -7,7 +7,7 @@ class HomeProperty extends StatelessWidget {
     {"name": "小区公告", "icon": const Icon(IconData(0xe6ee,fontFamily: 'AntdIcons'), size: 16.0, color: Colors.white) , "bgcolor": 0xFF02a7f0, "link": "/notice"},
     {"name": "议事堂", "icon": const Icon(IconData(0xe621,fontFamily: 'AntdIcons'), size: 16.0, color: Colors.white) , "bgcolor": 0xFFf4c200, "link": "/hall"},
     {"name": "保洁维修", "icon": const Icon(IconData(0xe70e,fontFamily: 'AntdIcons'), size: 16.0, color: Colors.white) , "bgcolor": 0xFF3fb785, "link": "/clean"},
-    {"name": "呼叫物业", "icon": const Icon(IconData(0xe70e,fontFamily: 'AntdIcons'), size: 16.0, color: Colors.white) , "bgcolor": 0xFFec6497, "link": "/call"},
+    {"name": "呼叫物业", "icon": const Icon(IconData(0xe785,fontFamily: 'AntdIcons'), size: 16.0, color: Colors.white) , "bgcolor": 0xFFec6497, "link": "/call"},
   ];
   List affair2List = [
     {"name": "政务公开", "icon": const Icon(IconData(0xe621,fontFamily: 'AntdIcons'), size: 16.0, color: Colors.white), "bgcolor": 0xFFc602f0, "link": "/govern"},
