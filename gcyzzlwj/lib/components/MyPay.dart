@@ -39,7 +39,6 @@ class _MyPayState extends State<MyPay> {
         appId: "wx7e527bffc978694d",
         // doOnAndroid: true,
         doOnIOS: false,
-          // universalLink: "https://your.univerallink.com/link/"
         );
     var result = await fluwx.isWeChatInstalled;
     // print("微信注册成功-- $result");
