@@ -43,12 +43,16 @@ class _MyPayState extends State<MyPay> {
         universalLink: universalLink,
       );
     var result = await fluwx.isWeChatInstalled;
-    // print("微信注册成功-- $result");
+    print("微信注册成功-- $result");
+    if(!result){
+      showToast("未安装微信APP");
+    }
   }
 
   paywx() async {
     try{
       var data = await NetHttp.request("/api/app/owner/order/power/unifiedOrder", context, params: widget.params);
+      
     if(data != null){
       if(widget.next!=null){
         widget.next();

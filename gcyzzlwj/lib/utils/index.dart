@@ -122,26 +122,26 @@ confirmDialog(context, {Widget title, Widget content, Function ok, Function onCa
   );
 }
 
+// 4 订单负载丢失结束(已扣款) (orderStatus = 3 && truePayFee > 0)
+// 5 订单正常结束(orderStatus = 2 && (endStatus = 6 || endStatus = 2 || endStatus = 1 || endStatus = 3 || endStatus  = 4))
+// 6 订单过载结束(orderStatus = 2 && (endStatus = 5))
+// 7 订单设备重启结束(orderStatus = 2 && (endStatus = 9))
+
 /* 结束状态 */
-Widget endStatus(String str ){
-  switch(str){
-    case "1":
-      return Text("正常充饱结束", style: TextStyle(color: Colors.blue),);
-    case "2":
-      return Text("手动停止订单", style: TextStyle(color: Colors.blue),);
-    case "3":
-      return Text("负载丢失", style: TextStyle(color: Colors.orange),);
-    case "4":
-      return Text("时间到结束", style: TextStyle(color: Colors.green),);
-    case "5":
-      return Text("过载结束", style: TextStyle(color: Colors.red),);
-    case "6":
-      return Text("涓流充电时掉电", style: TextStyle(color: Colors.blue),);
-    case "9":
-      return Text("复位重启结束充电", style: TextStyle(color: Colors.orange),);
-    default:
-      return Container();
+Widget endStatus(Map map ){
+
+  if(map["orderStatus"] == "3" && map["truePayFee"]>0){
+    return Text("订单负载丢失结束(已扣款)", style: TextStyle(color: Colors.red),);
+  }else if(map["orderStatus"] == "2" && (map["endStatus"] == "6" || map["endStatus"] == "2" || map["endStatus"] == "1" 
+    || map["endStatus"] == "3" || map["endStatus"] == "4" )){
+      return Text("订单正常结束", style: TextStyle(color: Colors.blue),);
+  }else if(map["orderStatus"] == "2" && map["endStatus"] == "5"){
+    return Text("订单过载结束", style: TextStyle(color: Colors.red),);
+  }else if(map["orderStatus"] == "2" && map["endStatus"] == "9"){
+    return Text("订单设备重启结束", style: TextStyle(color: Colors.red),);
   }
+  return Container();
+
 }
 
 /* 上传图片 */

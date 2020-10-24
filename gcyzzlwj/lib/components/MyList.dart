@@ -33,7 +33,7 @@ class _MyListState extends State<MyList> {
     var data = await NetHttp.request(widget.url, context, params:params);
     if(data != null){
       setState(() {
-        if(this.info != null){
+        if(current>1 && this.info != null){
           data["list"].insertAll(0, info["list"]);
         }
         this.info = data;
@@ -62,7 +62,7 @@ class _MyListState extends State<MyList> {
     return this.info==null?Container()
     :RefreshIndicator(
       onRefresh: ()async{
-        this.info["list"].clear();
+        // this.info["list"].clear();
         this.initial(1);
         setState(() {
           this._current = 1;

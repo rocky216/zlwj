@@ -63,7 +63,7 @@ class _PileOrderListPageState extends State<PileOrderListPage> {
                       Row(
                         children: [
                           Text("结束信息:"),
-                          endStatus(dataList[i]['endStatus'])
+                          endStatus(dataList[i])
                         ],
                       ),
                     ],
