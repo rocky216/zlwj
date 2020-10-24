@@ -82,7 +82,7 @@ class _UserFamilyPageState extends State<UserFamilyPage> {
                                   this.delete(state[i], f);
                                 });
                               },
-                              child: Icon(Icons.delete_outline_outlined),
+                              child: Icon(Icons.delete_outline),
                             ):null,
                           )
                         ).toList(),

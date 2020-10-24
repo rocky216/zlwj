@@ -90,7 +90,7 @@ class _PilePageState extends State<PilePage> {
             Container(
               margin: EdgeInsets.only(top: 10.0),
               child: ListTile(
-                leading: Icon(Icons.error_outline_outlined, color: Colors.orange,),
+                leading: const Icon(Icons.delete_outline, color: Colors.orange,),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: (detail["linkWe"] as List).map((f) => 
