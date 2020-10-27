@@ -132,7 +132,6 @@ confirmDialog(context, {Widget title, Widget content, Function ok, Function onCa
 
 /* 结束状态 */
 Widget endStatus(Map map ){
-
   if(map["orderStatus"] == "3" && map["truePayFee"]>0){
     return Text("订单负载丢失结束(已扣款)", style: TextStyle(color: Colors.red),);
   }else if(map["orderStatus"] == "2" && (map["endStatus"] == "6" || map["endStatus"] == "2" || map["endStatus"] == "1" 
