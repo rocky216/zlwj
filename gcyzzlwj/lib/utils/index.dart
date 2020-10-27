@@ -74,13 +74,16 @@ Future<void> initPlatformState(context, {Function next}) async {
       }
       print("获取RegistrationID: $rid");
     });
-    var d  = await jpush.isNotificationEnabled();
-    if(!d){
-      confirmDialog(context, title: Text("请打开通知权限"), ok: (){
-        jpush.openSettingsForNotification();
-      });
-      
+    
+    if(Platform.isAndroid){
+      var d  = await jpush.isNotificationEnabled();
+      if(!d){
+        confirmDialog(context, title: Text("请打开通知权限"), ok: (){
+          jpush.openSettingsForNotification();
+        });
+      }
     }
+    
     
 
     // If the widget was removed from the tree while the asynchronous platform

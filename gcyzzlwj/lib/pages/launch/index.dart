@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gcyzzlwj/config/index.dart';
 import 'package:gcyzzlwj/utils/http.dart';
 import 'package:gcyzzlwj/utils/index.dart';
@@ -33,23 +34,33 @@ class _LaunchPageState extends State<LaunchPage> {
 
   appVersion() async {
     var data = await NetHttp.request("/api/app/owner/common/app/version", context, params: {});
+    
     if(data != null){
-      if( Platform.isAndroid && data["versionNo"] != version){
+      if( Platform.isAndroid && data["versionNo"] != version ){
         confirmDialog(
           context, 
           title:Text("发现新版本，请及时更新？"),
           ok: () async {
-            if(Platform.isAndroid){
-              if (await canLaunch( data["appResourceUrl"] )) {
-                await launch(data["appResourceUrl"]);
-              }
-            }else if(Platform.isIOS){
-              if (await canLaunch( appStore )) {
-                await launch(appStore);
-              }
+            if (await canLaunch( data["appResourceUrl"] )) {
+              await launch(data["appResourceUrl"]);
             }
           }
         );
+      }else if( data["remark"] != iosVersion && Platform.isIOS){
+
+        confirmDialog(
+          context, 
+          title:Text("发现新版本，请及时更新？"),
+          ok: () async {
+            if (await canLaunch( appStore )) {
+              await launch(appStore);
+            }
+          },
+          onCancel: () async {
+            await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+          }
+        );
+        
       }else{
         this.isLogin();
       }

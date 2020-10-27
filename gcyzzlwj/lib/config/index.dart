@@ -11,7 +11,8 @@ final baseResources = "https://api.jxhtservice.com";
 // final baseResources = "http://118.25.196.194";
 
 
-final version = "1.0.0";
+final version = "1.1.0";
+final iosVersion = "1.0.0";
 final appStore="itms-apps://itunes.apple.com/cn/app/id1526645522?mt=8";
 
 final universalLink="https://api.jxhtservice.com/mobile/";

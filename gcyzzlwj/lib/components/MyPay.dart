@@ -21,7 +21,6 @@ class _MyPayState extends State<MyPay> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
     this._initFluwx();
     fluwx.weChatResponseEventHandler.listen((res) {
       // print(res.errStr);
@@ -38,8 +37,8 @@ class _MyPayState extends State<MyPay> {
     await fluwx.registerWxApi(
       /* 支付APPID */
         appId: "wx7e527bffc978694d",
-        // doOnAndroid: true,
-        doOnIOS: false,
+        doOnAndroid: true,
+        doOnIOS: true,
         universalLink: universalLink,
       );
     var result = await fluwx.isWeChatInstalled;
@@ -57,6 +56,7 @@ class _MyPayState extends State<MyPay> {
       if(widget.next!=null){
         widget.next();
       }
+      
       try{
         var d = await fluwx.payWithWeChat(
           appId: data["appid"].toString(),         //APPID
