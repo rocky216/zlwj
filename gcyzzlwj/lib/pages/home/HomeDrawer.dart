@@ -63,7 +63,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(state.users["userName"], style: TextStyle(color: Colors.white),),
+                            Text(state.users["userName"]??"", style: TextStyle(color: Colors.white),),
                             Text(state.users["account"], style: TextStyle(color: Colors.white),)
                           ]),
                     )

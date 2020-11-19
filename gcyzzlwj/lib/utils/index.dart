@@ -13,6 +13,17 @@ import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
+/* 鉴权 */
+isAuth( next ) async {
+  var userInfo = await getUserInfo();
+  if (userInfo != null && userInfo["isHe"] !=0 ) {
+      next();
+  }else{
+    showToast("请前往物业分配房间");
+  }
+}
+
+
 Future<void> initPlatformState(context, {Function next}) async {
   final JPush jpush = new JPush();
     String platformVersion;

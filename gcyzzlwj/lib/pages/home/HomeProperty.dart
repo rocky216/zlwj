@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gcyzzlwj/utils/index.dart';
 
 class HomeProperty extends StatelessWidget {
   HomeProperty({Key key}) : super(key: key);
@@ -57,7 +58,10 @@ class HomeProperty extends StatelessWidget {
                       children: affair1List.map((f){
                         return GestureDetector(
                           onTap: (){
-                            Navigator.of(context).pushNamed(f["link"]);
+                            isAuth((){
+                              Navigator.of(context).pushNamed(f["link"]);
+                            });
+                            
                           },
                           child: Container(
                             height: 60.0,
@@ -84,7 +88,10 @@ class HomeProperty extends StatelessWidget {
                           margin: EdgeInsets.only(top: 20.0),
                             child: GestureDetector(
                               onTap: (){
-                                Navigator.of(context).pushNamed(f["link"]);
+                                isAuth((){
+                                  Navigator.of(context).pushNamed(f["link"]);
+                                });
+                                
                               },
                               child: Column(
                                 children: [

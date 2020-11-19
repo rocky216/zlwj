@@ -1,15 +1,13 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:gcyzzlwj/components/MyHeader.dart';
-import 'package:gcyzzlwj/components/MyScrollView.dart';
 import 'package:gcyzzlwj/pages/home/HomeClean.dart';
 import 'package:gcyzzlwj/pages/home/HomeDrawer.dart';
 import 'package:gcyzzlwj/pages/home/HomeProperty.dart';
 import 'package:gcyzzlwj/pages/home/HomeSwiper.dart';
 import 'package:gcyzzlwj/redux/export.dart';
-import 'package:gcyzzlwj/utils/http.dart';
+import 'package:gcyzzlwj/utils/index.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -26,10 +24,10 @@ class _HomePageState extends State<HomePage>  {
   
 
   List serviceList = [
-    {"name": "访客", "img": "assets/images/visitor.png", "link": "/visitor"},
-    {"name": "门禁", "img": "assets/images/control.png", "link": "/control"},
-    {"name": "充电桩", "img": "assets/images/pile.png", "link": "/pile"},
-    {"name": "车牌", "img": "assets/images/plate.png", "link": "/plate"},
+    {"name": "访客", "img": "assets/images/visitor.png", "link": "/visitor", "isAuth": false},
+    {"name": "门禁", "img": "assets/images/control.png", "link": "/control", "isAuth": false},
+    {"name": "充电桩", "img": "assets/images/pile.png", "link": "/pile", "isAuth": true},
+    {"name": "车牌", "img": "assets/images/plate.png", "link": "/plate", "isAuth": true},
   ];
   
   
@@ -60,7 +58,7 @@ class _HomePageState extends State<HomePage>  {
           builder: (BuildContext context, state){
             return state.app.home==null ?Container()
             : Scaffold(
-              appBar: MyHeader(theme: "blue", title: state.app.home["heName"],
+              appBar: MyHeader(theme: "blue", title: state.app.home["heName"]??"",
               leading: Builder(
                 builder: (context){
                   return FlatButton(
@@ -98,7 +96,14 @@ class _HomePageState extends State<HomePage>  {
                                 child: GestureDetector(
                                     child: Image(image: AssetImage(serviceList[f]["img"]), fit: BoxFit.fitHeight),
                                     onTap: (){
-                                      Navigator.of(context).pushNamed(serviceList[f]["link"]);
+                                      if( !serviceList[f]["isAuth"] ){
+                                        isAuth((){
+                                          Navigator.of(context).pushNamed(serviceList[f]["link"]);
+                                        });
+                                      }else{
+                                        Navigator.of(context).pushNamed(serviceList[f]["link"]);
+                                      }
+                                      
                                     }),
                               ),
                               ).toList(),

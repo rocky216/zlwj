@@ -59,10 +59,10 @@ class _UsersPageState extends State<UsersPage> {
                   child: ListTile(
                     leading: CircleAvatar(
                       backgroundColor: Color(0xFFeeeeee),
-                      backgroundImage: state.users["avatarUrl"]!=null?NetworkImage(state.users["avatarUrl"]):null,
-                      child: state.users["avatarUrl"]!=null?Container():Icon(Icons.person, color: Colors.grey,),
+                      backgroundImage: state.users["avatarUrl"]!=null && state.users["avatarUrl"].isNotEmpty?NetworkImage(state.users["avatarUrl"]):null,
+                      child: state.users["avatarUrl"]!=null && state.users["avatarUrl"].isNotEmpty?Container():Icon(Icons.person, color: Colors.grey,),
                     ),
-                    title: Text(state.users["userName"],),
+                    title: Text(state.users["userName"]??"",),
                     subtitle: Text(state.users["account"]),
                     trailing: Icon(Icons.chevron_right, size: 30.0,),
                     onTap: (){
@@ -80,7 +80,10 @@ class _UsersPageState extends State<UsersPage> {
                         child: MaterialButton(
                           padding: EdgeInsets.zero,
                           onPressed: (){
-                            Navigator.of(context).pushNamed(f["link"]);
+                            isAuth((){
+                              Navigator.of(context).pushNamed(f["link"]);
+                            });
+                            
                           },
                           child: Container(
                             child: Column(
@@ -147,7 +150,10 @@ class _UsersPageState extends State<UsersPage> {
                         dense: true,
                         trailing: Icon(Icons.chevron_right, size: 30.0,),
                         onTap: (){
-                          Navigator.of(context).pushNamed(f["link"]);
+                          isAuth((){
+                            Navigator.of(context).pushNamed(f["link"]);
+                          });
+                          
                         },
                       );
                     }).toList(),
